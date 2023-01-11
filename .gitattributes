@@ -1,0 +1,3 @@
+everything !text !filter !merge !diff
+all !text !filter !merge !diff
+--everything !text !filter !merge !diff
