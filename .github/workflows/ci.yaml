@@ -1,0 +1,21 @@
+name: Staging
+
+on: push
+
+jobs:
+  run:
+    # Add, commit and finally push files from staging to production branch
+    # This is needed to make sure commit landing onto the staging branch don't overwrite
+    # all files on the production branch
+
+    name: Commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "--all"
+          push: "origin production"
