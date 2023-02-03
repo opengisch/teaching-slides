@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
 
 <head>
@@ -11,12 +7,12 @@
 	<title>Slides</title>
 	<meta name="description" content="Public slide show">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
 		integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/slides.css">
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 	<nav class="navbar navbar-light bg-light">
 		<a class="navbar-brand" href="https://www.opengis.ch/">
 			<img src="assets/openGIS-complete_new.png" width="300" height="100" class="d-inline-block align-top" alt="">
@@ -24,49 +20,37 @@
 	</nav>
 
 
-	<div class="container w-100 m-4">
-		<h1>teaching-slides</h1>
-		<h2>Automated repo used for publishing slides from the teaching repo.</h2>
-		<p>Slides are published to https://slides.opengis.ch</p>
+	<div class="container w-100 my-4 text-center text-white">
+		<h1>Presentations</h1>
+		<!-- <h2>Automated repo used for publishing slides from the teaching repo.</h2> -->
+		<!-- <p>Slides are published to https://slides.opengis.ch</p> -->
 	</div>
 
-	<!--[if lt IE 7]>
-			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-		<![endif]-->
-	<div class="list-group m-4 container w-100" id="presentation-links">
-		<a href="#" class="list-group-item list-group-item-action">A simple default list group item</a>
-
-		<a href="#" class="list-group-item list-group-item-action list-group-item-primary">A simple primary list group
-			item</a>
-		<a href="#" class="list-group-item list-group-item-action list-group-item-secondary">A simple secondary list group
-			item</a>
-		<a href="#" class="list-group-item list-group-item-action list-group-item-success">A simple success list group
-			item</a>
-		<a href="#" class="list-group-item list-group-item-action list-group-item-danger">A simple danger list group
-			item</a>
-		<a href="#" class="list-group-item list-group-item-action list-group-item-warning">A simple warning list group
-			item</a>
-		<a href="#" class="list-group-item list-group-item-action list-group-item-info">A simple info list group item</a>
-		<a href="#" class="list-group-item list-group-item-action list-group-item-light">A simple light list group item</a>
-		<a href="#" class="list-group-item list-group-item-action list-group-item-dark">A simple dark list group item</a>
+	<div class="container w-100 my-4">
+		<div class="list-group" id="presentation-links">
+			<a href="#" class="list-group-item list-group-item-action">Some Qgis workshop
+				presentation1</a>
+			<a href="#" class="list-group-item list-group-item-action">Some Qgis workshop
+				presentation2</a>
+			<a href="#" class="list-group-item list-group-item-action">Some Qgis workshop
+				presentation3</a>
+		</div>
 	</div>
-	<footer class="footer mt-auto py-3">
+
+	<footer class="footer mt-auto py-3 bg-light">
 		<div class="container">
-			<nav class="navbar navbar-expand-lg">
-				<div class="collapse navbar-collapse" id="navbarText">
+			<nav class="navbar navbar-light navbar-expand-lg justify-content-around">
+				<div class="text-center" id="navbarText">
 					<span class="text-muted navbar-text">Made with 💝 by
 						<a href="https://opengis.ch" target="blank">OPENGIS.ch</a>. © 2022</span>
 				</div>
-				<div class="collapse navbar-collapse" id="navbarText">
-					<span class="text-muted navbar-text">
-						<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="blank">License: CC BY-NC-SA 4.0</a>
-						<img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg">
-					</span>
-				</div>
+				<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="blank">
+					<img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg"
+						alt="License: CC BY-NC-SA 4.0">
+				</a>
 			</nav>
 		</div>
 	</footer>
-	<script src="" async defer></script>
 </body>
 
 </html>
