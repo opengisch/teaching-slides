@@ -7,7 +7,7 @@ from lxml import etree
 
 web_folder = path.relpath("web")
 root_index = path.relpath("index.html")
-presentation_link_id = "presentation_links"
+presentation_link_id = "presentation-links"
 
 
 def ensure_paths():

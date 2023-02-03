@@ -2,14 +2,58 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-<head></head>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Slides</title>
+    <meta name="description" content="Public slide show">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/slides.css">
+</head>
 
-<body>
-    <div id="presentation_links">
-        <a class="web_subfolder" name="link to subfolder 1" href="/sub1">Text1</a>
-        <a class="web_subfolder" name="link to subfolder 2" href="/sub2">Text2</a>
-        <a class="web_subfolder" name="link to subfolder 3" href="/sub3">Text3</a>
+<body class="d-flex flex-column h-100">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="https://www.opengis.ch/">
+            <img src="assets/openGIS-complete_new.png" width="300" height="100" class="d-inline-block align-top" alt="">
+        </a>
+    </nav>
+
+
+    <div class="container w-100 my-4 text-center text-white">
+        <h1>Presentations</h1>
+        <!-- <h2>Automated repo used for publishing slides from the teaching repo.</h2> -->
+        <!-- <p>Slides are published to https://slides.opengis.ch</p> -->
     </div>
+
+    <div class="container w-100 my-4">
+        <div class="list-group" id="presentation-links">
+            <a href="/sub1" class="web_subfolder list-group-item list-group-item-action"
+                name="link to subfolder 1">Text1</a>
+            <a href="/sub2" class="web_subfolder list-group-item list-group-item-action"
+                name="link to subfolder 2">Text2</a>
+            <a href="/sub3" class="web_subfolder list-group-item list-group-item-action"
+                name="link to subfolder 3">Text3</a>
+        </div>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <nav class="navbar navbar-light navbar-expand-lg justify-content-around">
+                <div class="text-center" id="navbarText">
+                    <span class="text-muted navbar-text">Made with 💝 by
+                        <a href="https://opengis.ch" target="blank">OPENGIS.ch</a>. © 2022</span>
+                </div>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="blank">
+                    <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg"
+                        alt="License: CC BY-NC-SA 4.0">
+                </a>
+            </nav>
+        </div>
+    </footer>
 </body>
+
+</html>
 
 </html>
