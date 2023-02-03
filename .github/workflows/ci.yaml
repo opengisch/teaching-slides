@@ -11,8 +11,19 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
+      # Push committed + updated root index to production
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
         with:
-          ref: staging
+          add: "--all"
+          push: "origin production"
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: production
 
       # Update root index
 
@@ -23,10 +34,5 @@ jobs:
           pip install -r ./scripts/requirements.txt
           python ./scripts/update_root_index.py
 
-      # Push committed + updated root index to production
-
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "--all"
-          push: "origin production"
+      # Re-commit
+      # ...
