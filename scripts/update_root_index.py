@@ -3,7 +3,7 @@ Update root 'index.html' to ensure that all and only the subfolders under 'web/'
 """
 
 from os import listdir, path
-from lxml import etree
+from lxml import etree, html
 
 web_folder = path.relpath("web")
 root_index = path.relpath("index.html")
@@ -18,16 +18,16 @@ def ensure_paths():
         raise FileExistsError(missing)
 
 
-def add_to(body, to_add: list[str], urls_in_index: list[str], parser):
+def add_to(parent, to_add: list[str], urls_in_index: list[str], parser):
     # Add to body
-    for url in sorted(to_add + urls_in_index):
+    for i, url in enumerate(sorted(to_add + urls_in_index)):
         if url in to_add:
-            el = etree.fromstring(
+            el = html.fromstring(
                 f"<a class='web_subfolder' name='link to {url}' href='{url}'>{url[1:]}</a>",
                 parser=parser,
             )
             print(f"Appending {url}")
-            body.append(el)
+            parent.insert(i, el)
 
 
 def remove_from(body, to_remove: list[str]):
@@ -39,7 +39,12 @@ def remove_from(body, to_remove: list[str]):
             body.remove(el)
 
 
-def parse(listed_subdirs: list[str]):
+def build_modified_tree(listed_subdirs: list[str]) -> str:
+    if not listed_subdirs:
+        raise ValueError(
+            f"Found empty {web_folder}! The continuous integration must have failed you earlier."
+        )
+
     parser = etree.HTMLParser()
     tree = etree.parse(root_index, parser=parser)
     root = tree.getroot()
@@ -53,19 +58,20 @@ def parse(listed_subdirs: list[str]):
     remove_from(div, to_remove)
 
     print("Done modifying the tree:\n***\n")
-    print(etree.tostring(root, pretty_print=True, method="html"))  # type: ignore
+    new_tree = etree.tostring(root, pretty_print=True, method="html")  # type: ignore
+    return new_tree.decode("utf-8")
+
+
+def save_to_disk(tree_output: str):
+    with open(root_index, "w") as fh:
+        fh.write(tree_output)
 
 
 def main():
     ensure_paths()
     listed_subdirs = listdir(web_folder)
-
-    if not listed_subdirs:
-        raise ValueError(
-            f"Found empty {web_folder}! The continuous integration must have failed you earlier."
-        )
-
-    parse(listed_subdirs)
+    new_tree = build_modified_tree(listed_subdirs)
+    save_to_disk(new_tree)
 
 
 if __name__ == "__main__":
