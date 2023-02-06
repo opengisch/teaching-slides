@@ -6,33 +6,69 @@ on:
       - staging
 
 jobs:
-  update_deployment:
+  prep_staging:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      # Prepping staging
 
-      # Push committed + updated root index to production
+      - uses: actions/checkout@v3
 
-      - name: Commit changes
+      - name: Check if web/ and index.html have been pushed
+        run: |
+          if [[ -d "web" ]] && [[ -f "index.html" ]]
+          then
+            exit 0
+          else
+            echo "::error ::Missing 'web' or 'index.html' from 'staging' branch."
+            exit 1
+          fi
+
+  update_deployment:
+    runs-on: ubuntu-latest
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    needs: [prep_staging]
+    steps:
+      # Push web to production
+
+      - name: Commit web/ to production
         uses: EndBug/add-and-commit@v9
         with:
-          add: "--all"
-          push: "origin production"
+          add: web/
+          push: origin production
 
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      # Checkout to production & peek list of subdirectories
+
+      - uses: actions/checkout@v3
         with:
           ref: production
 
-      # Update root index
+      - name: Fetch subdirs from production
+        id: subdirs
+        run: |
+          subdirs=$(ls web)
+          echo "include=$subdirs" >> $GITHUB_OUTPUT
 
-      - uses: actions/setup-python@v4
+      # Update index.html
+
+      - uses: actions/checkout@v3
+        with:
+          ref: staging
+
+      - name: Update index.html, parse opt-outs
+        id: update_index
+        uses: actions/setup-python@v4
         with:
           python-version: "3.10"
       - run: |
           pip install -r ./scripts/requirements.txt
-          python ./scripts/update_root_index.py
+          to_remove=$(python ./scripts/update_root_index.py "${{ github.subdirs.outputs.include }}" "${{ github.event.head_commit.message }}")
+          echo "to_remove=$to_remove" >> $GITHUB_OUTPUT
 
-      # Re-commit
-      # ...
+      # Push index.html to production and remove opted-out
+
+      - name: Commit index.html, remove opt-outs
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: index.html
+          remove: ${{ github.update_index.outputs.to_remove }}
+          push: origin production
