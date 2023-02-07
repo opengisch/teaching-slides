@@ -32,11 +32,20 @@ jobs:
 
       # Push web to production
 
-      - name: Commit all contents under web/ to production
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "web/**"
-          push: origin production --set-upstream --force
+      - name: Push web to production
+        env:
+          SRC_FOLDER_PATH: web
+          TARGET_BRANCH: production
+        run: |
+          files=$(find $SRC_FOLDER_PATH -type f)
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git fetch
+          git checkout $TARGET_BRANCH
+          git checkout ${GITHUB_REF##*/} -- $files
+          git add -A
+          git diff-index --quiet HEAD ||  git commit -am "deploy files"
+          git push origin $TARGET_BRANCH
 
       # Checkout to production & peek list of subdirectories
 
@@ -69,18 +78,28 @@ jobs:
         with:
           python-version: "3.10"
       - run: |
-          including="${{ github.subdirs.outputs.include }}"
+          including="${{ steps.subdirs.outputs.include }}"
           excluding="${{ github.event.head_commit.message }}"
+          echo "=> Including: $including"
+          echo "=> Excluding: $excluding"
           pip install -r ./scripts/requirements.txt
           to_remove=$(python ./scripts/update_root_index.py "$including" "$excluding")
           echo "to_remove=$to_remove" >> $GITHUB_OUTPUT
-          echo "=> To remove: $to_remove"
+          echo "=> Removing: $to_remove"
 
       # Push index.html to production and remove opted-out
 
-      - name: Commit index.html, remove opt-outs
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "index.html"
-          remove: "${{ github.update_index.outputs.to_remove }}"
-          push: "origin production --force"
+      - name: Push index.html to production
+        env:
+          TARGET_BRANCH: production
+        run: |
+          files="index.html"
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add -A
+          git commit -m "Updating index.html"
+          git fetch
+          git checkout $TARGET_BRANCH
+          git checkout ${GITHUB_REF##*/} -- $files
+          git diff-index --quiet HEAD ||  git commit -am "deploy files"
+          git push origin $TARGET_BRANCH

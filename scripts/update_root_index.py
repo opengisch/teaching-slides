@@ -38,7 +38,7 @@ def get_inputs() -> tuple[list[str], list[str]]:
     if not to_include:
         raise ValueError("This Python scripts requires at least one list as input!")
 
-    if argv[2]:
+    if argv[2] and ":" in argv[2]:
         argv2 = argv[2].split(":")
         to_exclude = argv2[1].strip().split(" ")
 
