@@ -9,9 +9,9 @@ jobs:
   prep_staging:
     runs-on: ubuntu-latest
     steps:
-      # Prepping staging
-
       - uses: actions/checkout@v3
+
+      # Prepping staging
 
       - name: Check if web/ and index.html have been pushed
         run: |
@@ -28,13 +28,15 @@ jobs:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     needs: [prep_staging]
     steps:
+      - uses: actions/checkout@v3
+
       # Push web to production
 
-      - name: Commit web/ to production
+      - name: Commit all contents under web/ to production
         uses: EndBug/add-and-commit@v9
         with:
-          add: web/
-          push: origin production
+          add: "web/**"
+          push: origin production --set-upstream --force
 
       # Checkout to production & peek list of subdirectories
 
@@ -45,9 +47,15 @@ jobs:
       - name: Fetch subdirs from production
         id: subdirs
         run: |
-          subdirs=$(ls web)
-          echo "include=$subdirs" >> $GITHUB_OUTPUT
-          echo "=> Found: $subdirs"
+          if [[ -d "web" ]]
+          then
+            subdirs=$(ls web)
+            echo "include=$subdirs" >> $GITHUB_OUTPUT
+            echo "=> Found: $subdirs"
+          else
+            echo "::error ::Missing 'web' from 'production' branch."
+            exit 1
+          fi
 
       # Update index.html, passing to_remove to next step for deletion
 
@@ -61,9 +69,9 @@ jobs:
         with:
           python-version: "3.10"
       - run: |
+          including="${{ github.subdirs.outputs.include }}"
+          excluding="${{ github.event.head_commit.message }}"
           pip install -r ./scripts/requirements.txt
-          $including="${{ github.subdirs.outputs.include }}"
-          $excluding="${{ github.event.head_commit.message }}"
           to_remove=$(python ./scripts/update_root_index.py "$including" "$excluding")
           echo "to_remove=$to_remove" >> $GITHUB_OUTPUT
           echo "=> To remove: $to_remove"
@@ -73,6 +81,6 @@ jobs:
       - name: Commit index.html, remove opt-outs
         uses: EndBug/add-and-commit@v9
         with:
-          add: index.html
-          remove: ${{ github.update_index.outputs.to_remove }}
-          push: origin production
+          add: "index.html"
+          remove: "${{ github.update_index.outputs.to_remove }}"
+          push: "origin production --force"

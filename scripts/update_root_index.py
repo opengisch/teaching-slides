@@ -27,15 +27,20 @@ def get_inputs() -> tuple[list[str], list[str]]:
     '
     arv[2] == ['dir1', 'dir2']
     """
-    if not (argv[1] and argv[2]):
-        raise ValueError("This Python scripts requires 2 arguments")
+    if not argv[1]:
+        raise ValueError(
+            "This Python scripts requires 1 argument (directories to include, optionally directories to exclude)"
+        )
 
     to_include = argv[1].split("\n")
-    argv2 = argv[2].split(":")
-    to_exclude = argv2[1].strip().split(" ")
+    to_exclude = []
 
     if not to_include:
         raise ValueError("This Python scripts requires at least one list as input!")
+
+    if argv[2]:
+        argv2 = argv[2].split(":")
+        to_exclude = argv2[1].strip().split(" ")
 
     return to_include, to_exclude
 
