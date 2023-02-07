@@ -47,8 +47,9 @@ jobs:
         run: |
           subdirs=$(ls web)
           echo "include=$subdirs" >> $GITHUB_OUTPUT
+          echo "=> Found: $subdirs"
 
-      # Update index.html
+      # Update index.html, passing to_remove to next step for deletion
 
       - uses: actions/checkout@v3
         with:
@@ -61,8 +62,11 @@ jobs:
           python-version: "3.10"
       - run: |
           pip install -r ./scripts/requirements.txt
-          to_remove=$(python ./scripts/update_root_index.py "${{ github.subdirs.outputs.include }}" "${{ github.event.head_commit.message }}")
+          $including="${{ github.subdirs.outputs.include }}"
+          $excluding="${{ github.event.head_commit.message }}"
+          to_remove=$(python ./scripts/update_root_index.py "$including" "$excluding")
           echo "to_remove=$to_remove" >> $GITHUB_OUTPUT
+          echo "=> To remove: $to_remove"
 
       # Push index.html to production and remove opted-out
 

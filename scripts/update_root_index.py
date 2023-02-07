@@ -19,13 +19,20 @@ def ensure_paths():
 
 
 def get_inputs() -> tuple[list[str], list[str]]:
-    # Get valid input
-    if not argv[1] or argv[2]:
+    """
+    Get valid input
+    argv[1] == '
+        dir1
+        dir2
+    '
+    arv[2] == ['dir1', 'dir2']
+    """
+    if not (argv[1] and argv[2]):
         raise ValueError("This Python scripts requires 2 arguments")
 
     to_include = argv[1].split("\n")
-    # Expecting 'Opted-out: val1 val2 val3...'
-    to_exclude = argv[2].split(":")[1].split(" ")
+    argv2 = argv[2].split(":")
+    to_exclude = argv2[1].strip().split(" ")
 
     if not to_include:
         raise ValueError("This Python scripts requires at least one list as input!")
@@ -80,7 +87,7 @@ def main():
     to_include, to_exclude = get_inputs()
     new_tree = build_modified_tree(to_include, to_exclude)
     save_to_disk(new_tree)
-    print(dumps(to_exclude))
+    print(dumps([f"/web{il}" for il in to_exclude]))
 
 
 if __name__ == "__main__":
