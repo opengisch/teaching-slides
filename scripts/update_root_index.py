@@ -90,9 +90,10 @@ def save_to_disk(tree_output: str):
 def main():
     ensure_paths()
     to_include, to_exclude = get_inputs()
+    print(f"Including: {to_include}. Excluding: {to_exclude}")
     new_tree = build_modified_tree(to_include, to_exclude)
     save_to_disk(new_tree)
-    print(dumps([f"/web{il}" for il in to_exclude]))
+    print("Tree rebuilt.")
 
 
 if __name__ == "__main__":

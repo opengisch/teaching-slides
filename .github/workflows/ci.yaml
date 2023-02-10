@@ -66,6 +66,16 @@ jobs:
             exit 1
           fi
 
+      - name: Check out pusher repository
+        uses: actions/checkout@v3
+        with:
+          repository: opengisch/presentations
+
+      - name: Fech opt-outs from pusher
+        id: optouts
+        run: |
+          echo "opted_out=$(cat .to_not_deploy.txt)" >> $GITHUB_OUTPUT
+
       # Update index.html, passing to_remove to next step for deletion
 
       - uses: actions/checkout@v3
@@ -79,13 +89,11 @@ jobs:
           python-version: "3.10"
       - run: |
           including="${{ steps.subdirs.outputs.include }}"
-          excluding="${{ github.event.head_commit.message }}"
+          excluding="${{ steps.optouts.outputs.opted_out }}"
           echo "=> Including: $including"
           echo "=> Excluding: $excluding"
           pip install -r ./scripts/requirements.txt
-          to_remove=$(python ./scripts/update_root_index.py "$including" "$excluding")
-          echo "to_remove=$to_remove" >> $GITHUB_OUTPUT
-          echo "=> Removing: $to_remove"
+          python ./scripts/update_root_index.py "$including" "$excluding"
 
       # Push index.html to production and remove opted-out
 
