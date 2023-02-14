@@ -16,7 +16,8 @@ def ensure_paths():
     """Throw on missing paths"""
     print(build_folder, deployments, root_index)
     if missing := next(
-        filter(lambda f: not path.exists(f), [root_index, build_folder, deployments]), None
+        filter(lambda f: not path.exists(f), [root_index, build_folder, deployments]),
+        None,
     ):
         raise FileExistsError(missing)
 
@@ -29,9 +30,19 @@ def get_expected_subdirs() -> list[str]:
         dict_json = load(fh)
 
     if not "to_deploy" in dict_json:
-        raise KeyError("Your '.build/deployments.json' file misses an essential key: 'to_deploy'. Aborting.")
+        raise KeyError(
+            "Your '.build/deployments.json' file misses an essential key: 'to_deploy'. Aborting."
+        )
 
-    return [f"/{u}" for u in dict_json["to_deploy"]]
+    rel_links = dict_json["to_deploy"]
+
+    if broken_links := next(
+        filter(lambda rel: not path.exists(path.join(build_folder, rel)), rel_links),
+        None,
+    ):
+        raise FileExistsError(broken_links)
+
+    return [f"/{u}" for u in rel_links]
 
 
 def add_to(parent, to_add: list[str], urls_in_index: list[str], parser):
