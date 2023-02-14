@@ -19,9 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Check for build
+      # Check for './build'
       # Setup Python
-      # Build index
+      # Rebuild './index.html'
+      # Save './build' and './index.html' as artifacts
 
       - name: Check for build, index.html and deployments.json
         run: |
@@ -61,18 +62,15 @@ jobs:
           pip install -r ./scripts/requirements.txt
           python ./scripts/update_root_index.py
 
+      - name: Cleanup
+        run: rm $DEPLOYMENTS
+    
   deploy_to_production:
     runs-on: ubuntu-latest
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     needs: [update_index]
     steps:
       - uses: actions/checkout@v3
-
-      # Remove './build/deployments.json'
-      # Push './build' and './index.html' to production
-
-      - name: Cleanup
-        run: rm $DEPLOYMENTS
 
       - uses: EndBug/add-and-commit@v9
         with:
