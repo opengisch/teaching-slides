@@ -38,10 +38,10 @@ def get_expected_subdirs() -> list[str]:
     rel_links_paths = [path.join(build_folder, rel) for rel in rel_links]
 
     if broken_links := next(
-        filter(lambda rel: not path.exists(rel), rel_links_paths),
+        filter(lambda rel: not path.isdir(rel), rel_links_paths),
         None,
     ):
-        raise FileExistsError(broken_links)
+        raise FileExistsError(f"'{broken_links}' does not exist or is not a folder! Aborting.")
 
     return [f"/{u}" for u in rel_links]
 
