@@ -8,6 +8,11 @@ on:
     branches:
       - staging
 
+env:
+  DEPLOYMENTS: ./build/deployments.json
+  BUILD: ./build
+  INDEX: ./index.html
+
 jobs:
   update_index:
     runs-on: ubuntu-latest
@@ -26,15 +31,15 @@ jobs:
 
           declare -a missing
           
-          if ! [[ -d "./build" ]]; then
+          if ! [[ -d "$BUILD" ]]; then
             missing+=("build")
           fi
 
-          if ! [[ -f "./build/deployments.json" ]]; then
+          if ! [[ -f "$DEPLOYMENTS" ]]; then
             missing+=("build/deployments.json")
           fi
           
-          if ! [[ -f "./index.html" ]]; then
+          if ! [[ -f "$INDEX" ]]; then
             missing+=("index.html")
           fi
           
@@ -63,34 +68,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Remove './build/deployments.json'
       # Push './build' and './index.html' to production
 
-      - name: Push build to production
-        env:
-          SRC_FOLDER_PATH: build
-          TARGET_BRANCH: production
-        run: |
-          files=$(find $SRC_FOLDER_PATH -type f)
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git fetch
-          git checkout $TARGET_BRANCH
-          git checkout ${GITHUB_REF##*/} -- $files
-          git add -A
-          git diff-index --quiet HEAD ||  git commit -am "deploy files"
-          git push origin $TARGET_BRANCH
+      - name: Cleanup
+        run: rm $DEPLOYMENTS
 
-      - name: Push index.html to production
-        env:
-          TARGET_BRANCH: production
-        run: |
-          files="index.html"
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git add -A
-          git commit -m "Updating index.html"
-          git fetch
-          git checkout $TARGET_BRANCH
-          git checkout ${GITHUB_REF##*/} -- $files
-          git diff-index --quiet HEAD ||  git commit -am "deploy files"
-          git push origin $TARGET_BRANCH
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: Deploying build
+          add: '["build", "index.html"]'
+          push: origin HEAD:production --force
