@@ -2,80 +2,69 @@
 Update root 'index.html' to ensure that all and only the subfolders under 'web/' are listed.
 """
 
-from sys import argv
 from os import path
 from lxml import etree, html
-from json import dumps
+from json import load
 
-web_folder = path.relpath("web")
-root_index = path.relpath("index.html")
+root_index = path.join(path.curdir, "index.html")
+build_folder = path.join(path.curdir, "build")
+deployments = path.join(build_folder, "deployments.json")
 presentation_link_id = "presentation-links"
 
 
 def ensure_paths():
-    # Throw on missing paths
-    if missing := next(filter(lambda f: not path.exists(f), [root_index]), None):
+    """Throw on missing paths"""
+    print(build_folder, deployments, root_index)
+    if missing := next(
+        filter(lambda f: not path.exists(f), [root_index, build_folder, deployments]), None
+    ):
         raise FileExistsError(missing)
 
 
-def get_inputs() -> tuple[list[str], list[str]]:
+def get_expected_subdirs() -> list[str]:
     """
-    Get valid input
-    argv[1] == '
-        dir1
-        dir2
-    '
-    arv[2] == ['dir1', 'dir2']
+    Read list of build candidates from '.build/deployments.json'
     """
-    if not argv[1]:
-        raise ValueError(
-            "This Python scripts requires 1 argument (directories to include, optionally directories to exclude)"
-        )
+    with open(deployments, "r") as fh:
+        dict_json = load(fh)
 
-    to_include = argv[1].split("\n")
-    to_exclude = []
+    if "to_deploy" not in dict_json:
+        raise KeyError("Your '.build/deployments.json' file misses an essential key: 'to_deploy'. Aborting.")
 
-    if not to_include:
-        raise ValueError("This Python scripts requires at least one list as input!")
-
-    if argv[2] and ":" in argv[2]:
-        argv2 = argv[2].split(":")
-        to_exclude = argv2[1].strip().split(" ")
-
-    return to_include, to_exclude
+    return [f"/{u}" for u in dict_json["to_deploy"]]
 
 
 def add_to(parent, to_add: list[str], urls_in_index: list[str], parser):
-    # Add to div
+    """Add to div"""
     for i, url in enumerate(sorted(to_add + urls_in_index)):
         if url in to_add:
             el = html.fromstring(
-                f"<a class='web_subfolder' name='link to {url}' href='{url}'>{url[1:]}</a>",
+                f"<a class='web_subfolder' href='{url}'>{url[1:]}</a>",
                 parser=parser,
             )
             parent.insert(i, el)
 
 
 def remove_from(parent, to_remove: list[str]):
-    # Remove from div
+    """Remove from div"""
     for el in parent:
         url = el.get("href")
         if url in to_remove:
             parent.remove(el)
 
 
-def build_modified_tree(to_include: list[str], to_exclude: list[str]) -> str:
-    # Edit tree
+def build_modified_tree(expected_subdirs: list[str]) -> str:
+    """Edit tree"""
     parser = etree.HTMLParser()
     tree = etree.parse(root_index, parser=parser)
     root = tree.getroot()
     divs = root.xpath("//div[@id = '%s']" % presentation_link_id)
     presentations_div = divs[0]
-    links = presentations_div.xpath("//a/@href")
-    to_add = [f"/{u}" for u in to_include if not u in links]
-    to_remove = [f"/{u}" for u in to_exclude]
+    links_in_index = presentations_div.xpath("//a/@href")
+    to_add = [u for u in expected_subdirs if not u in links_in_index]
+    to_remove = [u for u in links_in_index if not u in expected_subdirs]
 
-    add_to(presentations_div, to_add, links, parser)
+    add_to(presentations_div, to_add, links_in_index, parser)
     remove_from(presentations_div, to_remove)
 
     new_tree = etree.tostring(root, pretty_print=True, method="html")  # type: ignore
@@ -89,9 +78,9 @@ def save_to_disk(tree_output: str):
 
 def main():
     ensure_paths()
-    to_include, to_exclude = get_inputs()
-    print(f"Including: {to_include}. Excluding: {to_exclude}")
-    new_tree = build_modified_tree(to_include, to_exclude)
+    expected_subdirs = get_expected_subdirs()
+    print(f"Expected subdirs: {expected_subdirs}")
+    new_tree = build_modified_tree(expected_subdirs)
     save_to_disk(new_tree)
     print("Tree rebuilt.")
 

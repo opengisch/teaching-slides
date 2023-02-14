@@ -6,35 +6,64 @@ on:
       - staging
 
 jobs:
-  prep_staging:
+  update_index:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      # Prepping staging
+      # Check for build
+      # Setup Python
+      # Build index
 
-      - name: Check if web/ and index.html have been pushed
+      - name: Check for build, index.html and deployments.json
         run: |
-          if [[ -d "web" ]] && [[ -f "index.html" ]]
+          # ------------
+          # Ensure files
+          # ------------
+
+          declare -a missing
+          
+          if ! [[ -d "./build" ]]; then
+            missing+=("build")
+          fi
+
+          if ! [[ -f "./build/deployments.json" ]]; then
+            missing+=("build/deployments.json")
+          fi
+          
+          if ! [[ -f "./index.html" ]]; then
+            missing=+("index.html")
+          fi
+          
+          if ! [[ ${#missing[*]} -eq 0 ]]
           then
             exit 0
           else
-            echo "::error ::Missing 'web' or 'index.html' from 'staging' branch."
+            echo "::error ::Missing ${missing[@]} from 'staging' branch."
             exit 1
           fi
 
-  update_deployment:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Update index.html, parse opt-outs
+        run: |
+          pip install -r ./scripts/requirements.txt
+          python ./scripts/update_root_index.py
+
+  deploy_to_production:
     runs-on: ubuntu-latest
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    needs: [prep_staging]
+    needs: [update_index]
     steps:
       - uses: actions/checkout@v3
 
-      # Push web to production
+      # Push build to production
 
-      - name: Push web to production
+      - name: Push build to production
         env:
-          SRC_FOLDER_PATH: web
+          SRC_FOLDER_PATH: build
           TARGET_BRANCH: production
         run: |
           files=$(find $SRC_FOLDER_PATH -type f)
@@ -56,13 +85,13 @@ jobs:
       - name: Fetch subdirs from production
         id: subdirs
         run: |
-          if [[ -d "web" ]]
+          if [[ -d "build" ]]
           then
-            subdirs=$(ls web)
+            subdirs=$(ls build)
             echo "include=$subdirs" >> $GITHUB_OUTPUT
             echo "=> Found: $subdirs"
           else
-            echo "::error ::Missing 'web' from 'production' branch."
+            echo "::error ::Missing 'build' from 'production' branch."
             exit 1
           fi
 
@@ -75,25 +104,6 @@ jobs:
         id: optouts
         run: |
           echo "opted_out=$(cat .to_not_deploy.txt)" >> $GITHUB_OUTPUT
-
-      # Update index.html, passing to_remove to next step for deletion
-
-      - uses: actions/checkout@v3
-        with:
-          ref: staging
-
-      - name: Update index.html, parse opt-outs
-        id: update_index
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - run: |
-          including="${{ steps.subdirs.outputs.include }}"
-          excluding="${{ steps.optouts.outputs.opted_out }}"
-          echo "=> Including: $including"
-          echo "=> Excluding: $excluding"
-          pip install -r ./scripts/requirements.txt
-          python ./scripts/update_root_index.py "$including" "$excluding"
 
       # Push index.html to production and remove opted-out
 
