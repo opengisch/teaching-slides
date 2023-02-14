@@ -35,9 +35,10 @@ def get_expected_subdirs() -> list[str]:
         )
 
     rel_links = dict_json["to_deploy"]
+    rel_links_paths = [path.join(build_folder, rel) for rel in rel_links]
 
     if broken_links := next(
-        filter(lambda rel: not path.exists(path.join(build_folder, rel)), rel_links),
+        filter(lambda rel: not path.exists(rel), rel_links_paths),
         None,
     ):
         raise FileExistsError(broken_links)
