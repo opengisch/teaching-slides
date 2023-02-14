@@ -28,7 +28,7 @@ def get_expected_subdirs() -> list[str]:
     with open(deployments, "r") as fh:
         dict_json = load(fh)
 
-    if "to_deploy" not in dict_json:
+    if not "to_deploy" in dict_json:
         raise KeyError("Your '.build/deployments.json' file misses an essential key: 'to_deploy'. Aborting.")
 
     return [f"/{u}" for u in dict_json["to_deploy"]]
