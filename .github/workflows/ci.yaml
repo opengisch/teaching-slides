@@ -4,6 +4,14 @@ on:
   push:
     branches:
       - staging
+  pull_request:
+    branches:
+      - staging
+
+env:
+  DEPLOYMENTS: ./build/deployments.json
+  BUILD: ./build
+  INDEX: ./index.html
 
 jobs:
   update_index:
@@ -23,29 +31,30 @@ jobs:
 
           declare -a missing
           
-          if ! [[ -d "./build" ]]; then
+          if ! [[ -d "$BUILD" ]]; then
             missing+=("build")
           fi
 
-          if ! [[ -f "./build/deployments.json" ]]; then
+          if ! [[ -f "$DEPLOYMENTS" ]]; then
             missing+=("build/deployments.json")
           fi
           
-          if ! [[ -f "./index.html" ]]; then
-            missing=+("index.html")
+          if ! [[ -f "$INDEX" ]]; then
+            missing+=("index.html")
           fi
           
           if ! [[ ${#missing[*]} -eq 0 ]]
           then
-            exit 0
-          else
-            echo "::error ::Missing ${missing[@]} from 'staging' branch."
+            echo "::error ::Missing files from 'staging' branch."
+            echo "Missing: ${missing[*]}"
             exit 1
+          else
+            exit 0
           fi
 
       - uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: "3.10"
 
       - name: Update index.html, parse opt-outs
         run: |
@@ -59,65 +68,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Push build to production
+      # Remove './build/deployments.json'
+      # Push './build' and './index.html' to production
 
-      - name: Push build to production
-        env:
-          SRC_FOLDER_PATH: build
-          TARGET_BRANCH: production
-        run: |
-          files=$(find $SRC_FOLDER_PATH -type f)
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git fetch
-          git checkout $TARGET_BRANCH
-          git checkout ${GITHUB_REF##*/} -- $files
-          git add -A
-          git diff-index --quiet HEAD ||  git commit -am "deploy files"
-          git push origin $TARGET_BRANCH
+      - name: Cleanup
+        run: rm $DEPLOYMENTS
 
-      # Checkout to production & peek list of subdirectories
-
-      - uses: actions/checkout@v3
+      - uses: EndBug/add-and-commit@v9
         with:
-          ref: production
-
-      - name: Fetch subdirs from production
-        id: subdirs
-        run: |
-          if [[ -d "build" ]]
-          then
-            subdirs=$(ls build)
-            echo "include=$subdirs" >> $GITHUB_OUTPUT
-            echo "=> Found: $subdirs"
-          else
-            echo "::error ::Missing 'build' from 'production' branch."
-            exit 1
-          fi
-
-      - name: Check out pusher repository
-        uses: actions/checkout@v3
-        with:
-          repository: opengisch/presentations
-
-      - name: Fech opt-outs from pusher
-        id: optouts
-        run: |
-          echo "opted_out=$(cat .to_not_deploy.txt)" >> $GITHUB_OUTPUT
-
-      # Push index.html to production and remove opted-out
-
-      - name: Push index.html to production
-        env:
-          TARGET_BRANCH: production
-        run: |
-          files="index.html"
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git add -A
-          git commit -m "Updating index.html"
-          git fetch
-          git checkout $TARGET_BRANCH
-          git checkout ${GITHUB_REF##*/} -- $files
-          git diff-index --quiet HEAD ||  git commit -am "deploy files"
-          git push origin $TARGET_BRANCH
+          message: Deploying build
+          add: '["build", "index.html"]'
+          push: origin HEAD:production --force

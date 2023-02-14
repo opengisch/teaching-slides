@@ -7,7 +7,8 @@ from lxml import etree, html
 from json import load
 
 root_index = path.join(path.curdir, "index.html")
-build_folder = path.join(path.curdir, "build")
+build_folder_name = "build"
+build_folder = path.join(path.curdir, build_folder_name)
 deployments = path.join(build_folder, "deployments.json")
 presentation_link_id = "presentation-links"
 
@@ -35,12 +36,15 @@ def get_expected_subdirs() -> list[str]:
         )
 
     rel_links = dict_json["to_deploy"]
+    rel_links_paths = [path.join(build_folder, rel) for rel in rel_links]
 
     if broken_links := next(
-        filter(lambda rel: not path.exists(path.join(build_folder, rel)), rel_links),
+        filter(lambda rel: not path.isdir(rel), rel_links_paths),
         None,
     ):
-        raise FileExistsError(broken_links)
+        raise FileExistsError(
+            f"'{broken_links}' does not exist or is not a folder! Aborting."
+        )
 
     return [f"/{u}" for u in rel_links]
 
@@ -50,7 +54,7 @@ def add_to(parent, to_add: list[str], urls_in_index: list[str], parser):
     for i, url in enumerate(sorted(to_add + urls_in_index)):
         if url in to_add:
             el = html.fromstring(
-                f"<a class='web_subfolder' href='{url}'>{url[1:]}</a>",
+                f"<a class='web_subfolder' href='/{build_folder_name}{url}'>{url[1:]}</a>",
                 parser=parser,
             )
             parent.insert(i, el)
