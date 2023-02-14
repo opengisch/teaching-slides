@@ -32,7 +32,7 @@ jobs:
           fi
           
           if ! [[ -f "./index.html" ]]; then
-            missing=+("index.html")
+            missing+=("index.html")
           fi
           
           if ! [[ ${#missing[*]} -eq 0 ]]
@@ -59,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Push build to production
+      # Push './build' and './index.html' to production
 
       - name: Push build to production
         env:
@@ -75,37 +75,6 @@ jobs:
           git add -A
           git diff-index --quiet HEAD ||  git commit -am "deploy files"
           git push origin $TARGET_BRANCH
-
-      # Checkout to production & peek list of subdirectories
-
-      - uses: actions/checkout@v3
-        with:
-          ref: production
-
-      - name: Fetch subdirs from production
-        id: subdirs
-        run: |
-          if [[ -d "build" ]]
-          then
-            subdirs=$(ls build)
-            echo "include=$subdirs" >> $GITHUB_OUTPUT
-            echo "=> Found: $subdirs"
-          else
-            echo "::error ::Missing 'build' from 'production' branch."
-            exit 1
-          fi
-
-      - name: Check out pusher repository
-        uses: actions/checkout@v3
-        with:
-          repository: opengisch/presentations
-
-      - name: Fech opt-outs from pusher
-        id: optouts
-        run: |
-          echo "opted_out=$(cat .to_not_deploy.txt)" >> $GITHUB_OUTPUT
-
-      # Push index.html to production and remove opted-out
 
       - name: Push index.html to production
         env:
