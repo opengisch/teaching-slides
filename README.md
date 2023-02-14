@@ -9,7 +9,7 @@ graph TD
         C --> D(Build all directories using revealmd-js and copy the build under a 'build' subdirectory)
         D --> |Does any of the modified directory contain a 'DEPLOY' file?| E(Push them to opengisch/presentations_deployed:staging)
     end
-    subgraph Beta [opengisch/presentations_deployed]
+    subgraph Beta [opengisch/presentations_deployed:staging]
         E --> |on push| F(update root 'index.html' so that all and only the subdirs with a 'DEPLOY' file are listed)
         F --> G(push 'build' + 'index.html' to opengisch/presentations_deployed:production)
     end
