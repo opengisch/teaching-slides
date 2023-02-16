@@ -24,7 +24,7 @@ jobs:
       # Rebuild './index.html'
       # Save './build' and './index.html' as artifacts
 
-      - name: Check for build, index.html and deployments.json
+      - name: 🧐 Check for build, index.html and deployments.json
         run: |
           # ------------
           # Ensure files
@@ -57,12 +57,12 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Update index.html, parse opt-outs
+      - name: 🖎 Update index.html, parse opt-outs
         run: |
           pip install -r ./scripts/requirements.txt
           python ./scripts/update_root_index.py
 
-      - name: Cleanup
+      - name: 🧹 Cleanup
         run: rm $DEPLOYMENTS
       
       - uses: actions/upload-artifact@v3
@@ -86,7 +86,8 @@ jobs:
             ./build
             ./index.html
 
-      - uses: EndBug/add-and-commit@v9
+      - name: 🚠 Push to production
+        uses: EndBug/add-and-commit@v9
         with:
           message: Deploying build
           add: '["build", "index.html"]'
