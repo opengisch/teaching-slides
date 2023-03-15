@@ -14,7 +14,7 @@ env:
   INDEX: ./index.html
 
 jobs:
-  update_index:
+  update_index_push_to_prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,7 +22,7 @@ jobs:
       # Check for './build'
       # Setup Python
       # Rebuild './index.html'
-      # Save './build' and './index.html' as artifacts
+      # Push './build' and './index.html' to production
 
       - name: 🧐 Check for build, index.html and deployments.json
         run: |
@@ -65,27 +65,6 @@ jobs:
       - name: 🧹 Cleanup
         run: rm $DEPLOYMENTS
       
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build_artifacts
-          path: |
-            ./build
-            ./index.html
-    
-  deploy_to_production:
-    runs-on: ubuntu-latest
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    needs: [update_index]
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: build_artifacts
-          path: |
-            ./build
-            ./index.html
-
       - name: 🚠 Push to production
         uses: EndBug/add-and-commit@v9
         with:
