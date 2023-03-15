@@ -15,7 +15,6 @@ presentation_link_id = "presentation-links"
 
 def ensure_paths():
     """Throw on missing paths"""
-    print(build_folder, deployments, root_index)
     if missing := next(
         filter(lambda f: not path.exists(f), [root_index, build_folder, deployments]),
         None,
