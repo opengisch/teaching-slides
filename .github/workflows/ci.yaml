@@ -64,7 +64,9 @@ jobs:
           python ./scripts/update_root_index.py
 
       - name: 🧹 Cleanup
-        run: rm $DEPLOYMENTS
+        run: |
+          rm $DEPLOYMENTS
+          touch .nojekyll
       
       - name: 🚠 Push to production
         uses: EndBug/add-and-commit@v9
