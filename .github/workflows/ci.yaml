@@ -64,13 +64,14 @@ jobs:
           python ./scripts/update_root_index.py
 
       - name: 🧹 Cleanup
-        run: |
-          rm $DEPLOYMENTS
-          touch .nojekyll
+        run: rm $DEPLOYMENTS
       
+      - name: Create .nojekyll file to avoid problems with CSS
+        run: touch .nojekyll
+
       - name: 🚠 Push to production
         uses: EndBug/add-and-commit@v9
         with:
           message: Deploying build
-          add: '["build", "index.html"]'
+          add: '["build", "index.html", ".nojekyll"]'
           push: origin HEAD:production --force
