@@ -50,10 +50,11 @@ def get_expected_subdirs() -> list[str]:
 
 def add_to(parent, to_add: list[str], urls_in_index: list[str], parser):
     """Add to div"""
+    a_bootstrap_classes = "list-group-item list-group-item-action"
     for i, url in enumerate(sorted(to_add + urls_in_index)):
         if url in to_add:
             el = html.fromstring(
-                f"<a class='web_subfolder' href='/{build_folder_name}{url}'>{url[1:]}</a>",
+                f"<a class='{a_bootstrap_classes}' href='/{build_folder_name}{url}'>{url[1:]}</a>",
                 parser=parser,
             )
             parent.insert(i, el)
