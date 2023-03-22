@@ -54,10 +54,18 @@ def add_to(parent, to_add: list[str], urls_in_index: list[str], parser):
     for i, url in enumerate(sorted(to_add + urls_in_index)):
         if url in to_add:
             el = html.fromstring(
-                f"<a class='{a_bootstrap_classes}' href='/{build_folder_name}{url}'>{url[1:]}</a>",
+                f"<a class='{a_bootstrap_classes}' href='{build_href(url)}'>{url.partition('-')[2]}</a>",
                 parser=parser,
             )
             parent.insert(i, el)
+
+def get_subdir_from_href(href) -> str:
+    return href.partition(f"{build_folder_name}")[2]
+
+
+def build_href(url_part) -> str:
+    return f"/{build_folder_name}{url_part}"
+
 
 
 def remove_from(parent, to_remove: list[str]):
@@ -79,10 +87,9 @@ def build_modified_tree(expected_subdirs: list[str]) -> str:
         # in html: "presentation-links-talk" or "presentation-links-teaching"
         presentations_div = divs[0]
         links_in_index = presentations_div.xpath("//a/@href")
-        to_add = [u for u in expected_subdirs if u[1:].startswith(presentation_type) and not u in links_in_index]
-        to_remove = [u for u in links_in_index if not u in expected_subdirs]
+        to_add = [d for d in expected_subdirs if d[1:].startswith(presentation_type) and not build_href(d) in links_in_index]
+        to_remove = [href for href in links_in_index if not get_subdir_from_href(href) in expected_subdirs]
 
-        # TODO for teaching, talk
         add_to(presentations_div, to_add, links_in_index, parser)
         remove_from(presentations_div, to_remove)
 
