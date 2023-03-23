@@ -11,3 +11,7 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+.content {
+  max-width: 700px;
+}
