@@ -16,6 +16,10 @@ body {
   color: #526daa !important;
 }
 
+.list-group-item.disabled, .list-group-item:disabled {
+    background-color: rgba(256,256,256,0.5);
+}
+
 .content {
   max-width: 700px;
 }
