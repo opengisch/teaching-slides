@@ -1,5 +1,3 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
@@ -8,30 +6,44 @@
     <title>Slides</title>
     <meta name="description" content="Public slide show">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/slides.css">
 </head>
 
 <body class="d-flex flex-column h-100">
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="https://www.opengis.ch/">
-            <img src="assets/openGIS-complete_new.png" width="300" height="100" class="d-inline-block align-top" alt="">
+            <img src="assets/openGIS-complete_new.png" width="300" height="100" class="d-inline-block align-top" alt="Opengis.ch">
+        </a>
+
+        <a class="navbar-link" href="https://qfield.org/">
+            <img src="assets/logo_qfield.png" width="70" height="70" class="d-inline-block align-top" alt="Qfield">
+        </a>
+        <a class="navbar-link" href="https://qfield.cloud/">
+            <img src="assets/logo_qfieldcloud.webp" width="70" height="70" class="d-inline-block align-top" alt="Qfieldcloud">
+        </a>
+        <a class="nav-link" href="https://qgis.org/en/site/">
+            <img src="assets/logo-qgis.png" width="60" height="60" class="d-inline-block align-top" alt="Qgis.org">
         </a>
     </nav>
 
 
-    <div class="container w-100 my-4 text-center text-white">
-        <h1>Presentations</h1>
+    <div class="content container my-5 flex-grow-1 d-flex flex-column justify-content-center">
         <!-- <h2>Automated repo used for publishing slides from the teaching repo.</h2> -->
         <!-- <p>Slides are published to https://slides.opengis.ch</p> -->
-    </div>
+        <div class="container w-100 my-4">
+            <div class="list-group shadow">
+                <a href="#" class="list-group-item disabled bg-transparent h1 my-0 text-center">Presentations</a>
+                <a href="#" class="list-group-item disabled bg-transparent h3 m-0">Talks</a>
+                <div class="list-group" id="presentation-links-talk">
+                    <a class="list-group-item list-group-item-action" href="/build/talk-example-presentation">example-presentation</a><a class="list-group-item list-group-item-action" href="/build/talk-interlis-presentation">interlis-presentation</a><a class="list-group-item list-group-item-action" href="/build/talk-modelbaker-pitch">modelbaker-pitch</a>
+                </div>
+                <a href="#" class="list-group-item disabled list-group-item-action bg-transparent h3 m-0">Teaching</a>
+                <div class="list-group" id="presentation-links-teaching">
+                    <a class="list-group-item list-group-item-action" href="/build/teaching-example-course">example-course</a>
+                </div>
+            </div>
 
-    <div class="container w-100 my-4">
-        <div class="list-group" id="presentation-links">
-            <a href="/sub1" class="web_subfolder list-group-item list-group-item-action">Text1</a>
-            <a href="/sub2" class="web_subfolder list-group-item list-group-item-action">Text2</a>
-            <a href="/sub3" class="web_subfolder list-group-item list-group-item-action">Text3</a>
         </div>
     </div>
 
@@ -39,18 +51,15 @@
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-lg justify-content-around">
                 <div class="text-center" id="navbarText">
-                    <span class="text-muted navbar-text">Made with 💝 by
-                        <a href="https://opengis.ch" target="blank">OPENGIS.ch</a>. © 2022</span>
+                    <span class="text-muted navbar-text">Made with &#128157; by
+                        <a href="https://opengis.ch" target="blank">OPENGIS.ch</a>. &#169; 2022</span>
                 </div>
                 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="blank">
-                    <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg"
-                        alt="License: CC BY-NC-SA 4.0">
+                    <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" alt="License: CC BY-NC-SA 4.0">
                 </a>
             </nav>
         </div>
     </footer>
 </body>
-
-</html>
 
 </html>

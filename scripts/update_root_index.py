@@ -10,7 +10,7 @@ root_index = path.join(path.curdir, "index.html")
 build_folder_name = "build"
 build_folder = path.join(path.curdir, build_folder_name)
 deployments = path.join(build_folder, "deployments.json")
-presentation_link_id = "presentation-links"
+presentation_types = ["talk", "teaching"]
 
 
 def ensure_paths():
@@ -50,13 +50,22 @@ def get_expected_subdirs() -> list[str]:
 
 def add_to(parent, to_add: list[str], urls_in_index: list[str], parser):
     """Add to div"""
+    a_bootstrap_classes = "list-group-item list-group-item-action"
     for i, url in enumerate(sorted(to_add + urls_in_index)):
         if url in to_add:
             el = html.fromstring(
-                f"<a class='web_subfolder' href='/{build_folder_name}{url}'>{url[1:]}</a>",
+                f"<a class='{a_bootstrap_classes}' href='{build_href(url)}'>{url.partition('-')[2]}</a>",
                 parser=parser,
             )
             parent.insert(i, el)
+
+def get_subdir_from_href(href) -> str:
+    return href.partition(f"{build_folder_name}")[2]
+
+
+def build_href(url_part) -> str:
+    return f"/{build_folder_name}{url_part}"
+
 
 
 def remove_from(parent, to_remove: list[str]):
@@ -67,19 +76,22 @@ def remove_from(parent, to_remove: list[str]):
             parent.remove(el)
 
 
+
 def build_modified_tree(expected_subdirs: list[str]) -> str:
     """Edit tree"""
     parser = etree.HTMLParser()
     tree = etree.parse(root_index, parser=parser)
     root = tree.getroot()
-    divs = root.xpath("//div[@id = '%s']" % presentation_link_id)
-    presentations_div = divs[0]
-    links_in_index = presentations_div.xpath("//a/@href")
-    to_add = [u for u in expected_subdirs if not u in links_in_index]
-    to_remove = [u for u in links_in_index if not u in expected_subdirs]
+    for presentation_type in presentation_types:
+        divs = root.xpath(f"//div[@id = 'presentation-links-{presentation_type}']")
+        # in html: "presentation-links-talk" or "presentation-links-teaching"
+        presentations_div = divs[0]
+        links_in_index = presentations_div.xpath("//a/@href")
+        to_add = [d for d in expected_subdirs if d[1:].startswith(presentation_type) and not build_href(d) in links_in_index]
+        to_remove = [href for href in links_in_index if not get_subdir_from_href(href) in expected_subdirs]
 
-    add_to(presentations_div, to_add, links_in_index, parser)
-    remove_from(presentations_div, to_remove)
+        add_to(presentations_div, to_add, links_in_index, parser)
+        remove_from(presentations_div, to_remove)
 
     new_tree = etree.tostring(root, pretty_print=True, method="html")  # type: ignore
     return new_tree.decode("utf-8")
