@@ -24,3 +24,14 @@ body {
   max-width: 700px;
 }
 
+.nav-item {
+  min-width: 350px;
+  flex: 1;
+  height: 100px;
+  align-items: center;
+}
+
+.nav-item.logos {
+  display: flex;
+  justify-content: space-around;
+}
