@@ -107,9 +107,16 @@ def print_html(tree_root) -> str:
     new_tree = etree.tostring(tree_root, pretty_print=True, method="html")  # type: ignore
     return new_tree.decode("utf-8")
 
+
+def adapt_assets_dir(html: str) -> str:
+    root_rel_path = "../../"
+    assets = "assets"
+    return html.replace(assets, f"{root_rel_path}{assets}")
+
+
 def adapt_root_index_html(parser, root, expected_subdirs: list[str]) -> tuple[list[str], str]:
     """Edit tree"""
-    to_add = []
+    added = []
     for presentation_type in presentation_types:
         divs = root.xpath(f"//div[@id = 'presentation-links-{presentation_type}']")
         # in html: "presentation-links-talk" or "presentation-links-teaching"
@@ -120,8 +127,9 @@ def adapt_root_index_html(parser, root, expected_subdirs: list[str]) -> tuple[li
 
         add_to_root_index(presentations_div, to_add, links_in_index, parser)
         remove_from_root_index(presentations_div, to_remove)
+        added += to_add
     
-    return to_add, print_html(root)
+    return added, print_html(root)
 
 
 def get_subdir_a_tags_attrs(parser, subdir_index) -> list[list[str]]: # [href, title][]
@@ -130,19 +138,22 @@ def get_subdir_a_tags_attrs(parser, subdir_index) -> list[list[str]]: # [href, t
     return [[a.get("href"), a.get("title")] for a in presentation_links]
 
 
-def adapt_subdir_index_html(parser, root, subdir_index,  dirname: str):
-    parent = root.xpath(f"//a[@id = 'presentation-links']")[0]
+def adapt_subdir_index_html(parser, root, subdir_index,  url: str) -> str:
+    parent = root.xpath(f"//div[@id = 'presentation-links']")[0]
     for i, el in enumerate(parent):
         if i == 0:
             # Change content title
-            el.text = slug_without_prefix(dirname)
+            el.text = slug_without_prefix(url)
         else:
             # Remove following links
             parent.remove(el)
-    # Insert presentation links
+
+    # Insert presentation links ...
     for i, (href, title) in enumerate(get_subdir_a_tags_attrs(parser, subdir_index)):
         a_tag = create_a_tag(parser, href, title)
-        parent.insert(i, a_tag)
+        # ... after content title
+        i_below_title = i + 1
+        parent.insert(i_below_title, a_tag)
     return print_html(root)
 
 
@@ -160,10 +171,10 @@ def main():
     save_to_disk(root_index, root_index_html)
     print("Root index.html updated.")
 
-    for dirname in added:
-        subdir_index = path.join(build_folder, dirname, "index.html")
-        subdir_index_html = adapt_subdir_index_html(parser, root, subdir_index, dirname)
-        save_to_disk(root_index, subdir_index_html)
+    for url in added:
+        subdir_index = path.join(build_folder, slug(url), "index.html")
+        subdir_index_html = adapt_subdir_index_html(parser, root, subdir_index, url)
+        save_to_disk(subdir_index, adapt_assets_dir(subdir_index_html))
     print("Presentation subfolders index.html updated.")
 
 
