@@ -12,19 +12,22 @@
 
 <body class="d-flex flex-column h-100">
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="https://www.opengis.ch/">
-            <img src="assets/openGIS-complete_new.png" width="300" height="100" class="d-inline-block align-top" alt="Opengis.ch">
-        </a>
-
-        <a class="navbar-link" href="https://qfield.org/">
-            <img src="assets/logo_qfield.png" width="70" height="70" class="d-inline-block align-top" alt="Qfield">
-        </a>
-        <a class="navbar-link" href="https://qfield.cloud/">
-            <img src="assets/logo_qfieldcloud.webp" width="70" height="70" class="d-inline-block align-top" alt="Qfieldcloud">
-        </a>
-        <a class="nav-link" href="https://qgis.org/en/site/">
-            <img src="assets/logo-qgis.png" width="60" height="60" class="d-inline-block align-top" alt="Qgis.org">
-        </a>
+        <div class="nav-item">
+            <a href="/" title="Opengis.ch">
+                <img src="assets/openGIS-complete_new.png" width="300" height="100" class="d-inline-block align-top" alt="Opengis.ch">
+            </a>
+        </div>
+        <div class="nav-item logos">
+            <a href="https://qfield.org/" title="Qfield">
+                <img src="assets/logo_qfield.png" width="60" height="60" class="d-inline-block align-top" alt="Qfield">
+            </a>
+            <a href="https://qfield.cloud/" title="Qfieldcloud">
+                <img src="assets/logo_qfieldcloud.webp" width="60" height="60" class="d-inline-block align-top" alt="Qfieldcloud">
+            </a>
+            <a href="https://qgis.org/en/site/" title="Qgis">
+                <img src="assets/logo-qgis.png" width="50" height="50" class="d-inline-block align-top" alt="Qgis.org">
+            </a>
+        </div>
     </nav>
 
 
@@ -32,16 +35,16 @@
         <!-- <h2>Automated repo used for publishing slides from the teaching repo.</h2> -->
         <!-- <p>Slides are published to https://slides.opengis.ch</p> -->
         <div class="container w-100 my-4">
-            <div class="list-group shadow">
-                <a href="#" class="list-group-item disabled bg-transparent h1 my-0 text-center">Presentations</a>
-                <a href="#" class="list-group-item disabled bg-transparent h3 m-0">Talks</a>
+            <div class="list-group shadow" id="presentation-links">
+                <a href="#" class="list-group-item disabled h1 my-0 text-center">Presentations</a>
+                <a href="#" class="list-group-item disabled h3 m-0">Talks</a>
                 <div class="list-group" id="presentation-links-talk">
-                    <a class="list-group-item list-group-item-action" href="/build/talk-example-presentation">example-presentation</a><a class="list-group-item list-group-item-action" href="/build/talk-interlis-presentation">interlis-presentation</a><a class="list-group-item list-group-item-action" href="/build/talk-modelbaker-pitch">modelbaker-pitch</a>
-                </div>
-                <a href="#" class="list-group-item disabled list-group-item-action bg-transparent h3 m-0">Teaching</a>
+<a class="list-group-item list-group-item-action" title="example-presentation" href="/talk-example-presentation">example-presentation</a><a class="list-group-item list-group-item-action" title="interlis-presentation" href="/talk-interlis-presentation">interlis-presentation</a><a class="list-group-item list-group-item-action" title="modelbaker-pitch" href="/talk-modelbaker-pitch">modelbaker-pitch</a>
+</div>
+                <a href="#" class="list-group-item disabled list-group-item-action h3 m-0">Teaching</a>
                 <div class="list-group" id="presentation-links-teaching">
-                    <a class="list-group-item list-group-item-action" href="/build/teaching-example-course">example-course</a>
-                </div>
+<a class="list-group-item list-group-item-action" title="example-course" href="/teaching-example-course">example-course</a>
+</div>
             </div>
 
         </div>
