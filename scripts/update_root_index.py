@@ -1,22 +1,24 @@
 """
-Update root 'index.html' to ensure that all and only the subfolders under 'web/' are listed.
+Build root 'index.html' to ensure that all and only the subfolders are listed.
 """
 
 from os import path
-from lxml import etree, html
+import chevron
 from json import load
 
-root_index = path.join(path.curdir, "index.html")
 build_folder_name = "build"
 build_folder = path.join(path.curdir, build_folder_name)
+index_template = path.join(path.curdir, build_folder, "index.html")
+root_index = path.join(path.curdir, "index.html")
 deployments = path.join(build_folder, "deployments.json")
-presentation_types = ["talk", "teaching"]
+talk = "talk", 
+teaching = "teaching"
 
 
 def ensure_paths():
     """Throw on missing paths"""
     if missing := next(
-        filter(lambda f: not path.exists(f), [root_index, build_folder, deployments]),
+        filter(lambda f: not path.exists(f), [index_template, build_folder, deployments]),
         None,
     ):
         raise FileExistsError(missing)
@@ -48,67 +50,46 @@ def get_expected_subdirs() -> list[str]:
     return [f"/{u}" for u in rel_links]
 
 
-def add_to(parent, to_add: list[str], urls_in_index: list[str], parser):
-    """Add to div"""
-    a_bootstrap_classes = "list-group-item list-group-item-action"
-    for i, url in enumerate(sorted(to_add + urls_in_index)):
-        if url in to_add:
-            el = html.fromstring(
-                f"<a class='{a_bootstrap_classes}' href='{build_href(url)}'>{url.partition('-')[2]}</a>",
-                parser=parser,
-            )
-            parent.insert(i, el)
-
-def get_subdir_from_href(href) -> str:
-    return href.partition(f"{build_folder_name}")[2]
+def strip_prefix(url: str) -> str:
+    """E.g. example-presentation"""
+    return url.partition('-')[2]
 
 
-def build_href(url_part) -> str:
-    return f"/{build_folder_name}{url_part}"
+def generate_keys_from_dirnames(prefix, dirs: list[str]):
+    return [{"url": d, "title": strip_prefix(d)} for d in dirs if d[1:].startswith(prefix)]
 
 
-
-def remove_from(parent, to_remove: list[str]):
-    """Remove from div"""
-    for el in parent:
-        url = el.get("href")
-        if url in to_remove:
-            parent.remove(el)
-
-
-
-def build_modified_tree(expected_subdirs: list[str]) -> str:
-    """Edit tree"""
-    parser = etree.HTMLParser()
-    tree = etree.parse(root_index, parser=parser)
-    root = tree.getroot()
-    for presentation_type in presentation_types:
-        divs = root.xpath(f"//div[@id = 'presentation-links-{presentation_type}']")
-        # in html: "presentation-links-talk" or "presentation-links-teaching"
-        presentations_div = divs[0]
-        links_in_index = presentations_div.xpath("//a/@href")
-        to_add = [d for d in expected_subdirs if d[1:].startswith(presentation_type) and not build_href(d) in links_in_index]
-        to_remove = [href for href in links_in_index if not get_subdir_from_href(href) in expected_subdirs]
-
-        add_to(presentations_div, to_add, links_in_index, parser)
-        remove_from(presentations_div, to_remove)
-
-    new_tree = etree.tostring(root, pretty_print=True, method="html")  # type: ignore
-    return new_tree.decode("utf-8")
+def generate_template_data(expected_subdirs: list[str]):
+    talk_presentations = generate_keys_from_dirnames(talk, expected_subdirs)
+    teaching_presentations = generate_keys_from_dirnames(teaching, expected_subdirs)
+    return {
+        "is_root": True,
+        "pageTitle": "Presentations",
+        "has_talk_presentations": bool(talk_presentations),
+        "talk_presentations": talk_presentations,
+        "has_teaching_presentations": bool(teaching_presentations),
+        "teaching_presentations": teaching_presentations,
+    }
 
 
-def save_to_disk(tree_output: str):
-    with open(root_index, "w") as fh:
-        fh.write(tree_output)
+def save_to_disk(file: str, html: str):
+    with open(file, "w") as fh:
+        fh.write(html)
+
+
+def generate_root_html(template, data):
+    with open(template, 'r') as f:
+        return chevron.render(f, data)
 
 
 def main():
     ensure_paths()
     expected_subdirs = get_expected_subdirs()
     print(f"Expected subdirs: {expected_subdirs}")
-    new_tree = build_modified_tree(expected_subdirs)
-    save_to_disk(new_tree)
-    print("Tree rebuilt.")
+    data = generate_template_data(expected_subdirs)
+    html_str = generate_root_html(index_template, data)
+    save_to_disk(root_index, html_str)
+    print("Root index.html updated.")
 
 
 if __name__ == "__main__":

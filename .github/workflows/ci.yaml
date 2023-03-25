@@ -11,7 +11,7 @@ on:
 env:
   DEPLOYMENTS: ./build/deployments.json
   BUILD: ./build
-  INDEX: ./index.html
+  INDEX: ./build/index.html
 
 jobs:
   update_index_push_to_prod:
@@ -21,8 +21,10 @@ jobs:
 
       # Check for './build'
       # Setup Python
-      # Rebuild './index.html'
-      # Push './build' and './index.html' to production
+      # Build './index.html'
+      # Flatten directories
+      # Cleanup 
+      # Push to production
 
       - name: 🧐 Check for build, index.html and deployments.json
         run: |
@@ -41,7 +43,7 @@ jobs:
           fi
           
           if ! [[ -f "$INDEX" ]]; then
-            missing+=("index.html")
+            missing+=("build/index.html")
           fi
           
           if ! [[ ${#missing[*]} -eq 0 ]]
@@ -63,8 +65,14 @@ jobs:
           pip install -r ./scripts/requirements.txt
           python ./scripts/update_root_index.py
 
+      - name: Unpack subfolders to improve page navigation
+        run: |
+          rm $DEPLOYMENTS
+          rm $INDEX
+          git mv $BUILD/* .
+
       - name: 🧹 Cleanup
-        run: rm $DEPLOYMENTS
+        run: rmdir $BUILD
       
       - name: Create .nojekyll file to avoid problems with CSS
         run: touch .nojekyll
@@ -73,5 +81,6 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           message: Deploying build
-          add: '["build", "index.html", ".nojekyll"]'
+          add: '.'
           push: origin HEAD:production --force
+
