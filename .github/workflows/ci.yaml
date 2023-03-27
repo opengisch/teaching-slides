@@ -8,25 +8,17 @@ on:
     branches:
       - staging
 
-env:
-  DEPLOYMENTS: ./build/deployments.json
-  BUILD: ./build
-  INDEX: ./build/index.html
 
 jobs:
-  update_index_push_to_prod:
+  push_to_prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      # Check for './build'
-      # Setup Python
-      # Build './index.html'
-      # Flatten directories
       # Cleanup 
       # Push to production
 
-      - name: 🧐 Check for build, index.html and deployments.json
+      - name: 🧐 Check for index.html
         run: |
           # ------------
           # Ensure files
@@ -34,46 +26,13 @@ jobs:
 
           declare -a missing
           
-          if ! [[ -d "$BUILD" ]]; then
-            missing+=("build")
-          fi
-
-          if ! [[ -f "$DEPLOYMENTS" ]]; then
-            missing+=("build/deployments.json")
-          fi
-          
-          if ! [[ -f "$INDEX" ]]; then
-            missing+=("build/index.html")
-          fi
-          
-          if ! [[ ${#missing[*]} -eq 0 ]]
-          then
-            echo "::error ::Missing files from 'staging' branch."
-            echo "Missing: ${missing[*]}"
+          if ! [[ -f "index.html" ]]; then
+            echo "Missing: index.html"
             exit 1
           else
             exit 0
           fi
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-          cache: "pip"
-
-      - name: 🖎 Update index.html, parse opt-outs
-        run: |
-          pip install -r ./scripts/requirements.txt
-          python ./scripts/update_root_index.py
-
-      - name: Unpack subfolders to improve page navigation
-        run: |
-          rm $DEPLOYMENTS
-          rm $INDEX
-          git mv $BUILD/* .
-
-      - name: 🧹 Cleanup
-        run: rmdir $BUILD
-      
+  
       - name: Create .nojekyll file to avoid problems with CSS
         run: touch .nojekyll
 
