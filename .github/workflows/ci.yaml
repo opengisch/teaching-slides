@@ -10,6 +10,7 @@ on:
 
 env:
   BUILD: ./build
+  INDEX: ./build/index.html
 
 jobs:
   update_index_push_to_prod:
