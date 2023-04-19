@@ -26,14 +26,12 @@
 
 ![Logo](./assets/modelbaker_logo.png)
 </script></section><section  data-markdown><script type="text/template">
-###  While INTERLIS is the hard stuff ...
-
-
 <!-- I might sound like a nerd, but in fact you can get addicted to it. Sometimes ideas appear to model everything in INTERLIS. It's a common thing when you have to do with people using INTERLIS. In fact I thought about to make this presentation (and an abstract and extended version of it) in INTERLIS. -->
 
-## ... MODEL BAKER is the beginner drug
-</script></section><section  data-markdown><script type="text/template">
 # What is MODEL BAKER?
+While INTERLIS is the hard stuff ...
+
+... MODEL BAKER is the beginner drug
 </script></section><section  data-markdown><script type="text/template">
 ## A QGIS Project Generator
 
@@ -72,7 +70,7 @@ Like [Asistente LADM-COL](https://github.com/SwissTierrasColombia/Asistente-LADM
 <!--
 Model Baker can be used as a framework for other projects. The plugin [Asistente LADM-COL](https://github.com/SwissTierrasColombia/Asistente-LADM-COL), created for the [Colombian implementation of the Land Administration Domain Model (LADM)](https://www.proadmintierra.info/), uses the Model Baker as a library to implement as much of the specific solution as possible as QGIS core functionality.
 -->
-</script></section><section  data-markdown><script type="text/template">
+</script></section><section ><section data-markdown><script type="text/template">
 ## Check it out now
 
 <!--
@@ -84,24 +82,106 @@ Model Baker can be used as a framework for other projects. The plugin [Asistente
 - Import everything
 - Show validation and export
 -->
-</script></section><section  data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
+
+The smart Workflow Wizard guides you through the required use cases.
+
+![w01](./assets/modelbaker_wizard_01.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+Easypeasy drag'n'drop of the files to be imported.
+
+![w02](./assets/modelbaker_wizard_02.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+Already imported models are recognized. As well as models required by the transfer files.
+
+![w03](./assets/modelbaker_wizard_03.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+Users keep the complete control over the ili2db commands.
+
+![w04](./assets/modelbaker_wizard_04.png)
+</script></section></section><section ><section data-markdown><script type="text/template">
 ## What is the UsabILIty Hub?
 Receive meta data like ***ili2db settings***, ***layer styles*** and ***orders*** etc. automatically over the web. 
 
-See https://usabilityhub.opengis.ch/
+Just as we can receive INTERLIS models via an ilimodels.xml using http://models.interlis.ch, we can receive meta information via an ilidata.xml from UsabILItyHub https://usabilityhub.opengis.ch.
 
-And the [Model Baker Documentation](https://opengisch.github.io/QgisModelBaker/background_info/usabilityhub/modelbaker_integration/)
-</script></section><section  data-markdown><script type="text/template">
-## ilidata.xml
-Get the additional information with the `ilidata.xml` file on the UsabILIty Hub (currently https://models.opengis.ch) and the linked repositories. 
-</script></section><section  data-markdown><script type="text/template">
-## Metaconfiguration and Toppings
-Settings for tools are configured in a metaconfiguration file, as well as links to topping files that contain information about GIS project.
+See the [Model Baker Documentation](https://opengisch.github.io/QgisModelBaker/background_info/usabilityhub/modelbaker_integration/) and https://usabilityhub.opengis.ch
+
+</script></section><section data-markdown><script type="text/template">
+
+### Metaconfiguration and Toppings
+Settings for tools are configured in a metaconfiguration file, as well as links to topping files that contain information about QGIS project.
 
 ***Thus, this additional information usually consists of a metaconfiguration and any number of toppings.***
-</script></section><section  data-markdown><script type="text/template">
-![uml](./assets/modelbaker_usabilityhub.png)
-</script></section></div>
+
+</script></section><section data-markdown><script type="text/template">
+
+### Workflow in Model Baker
+
+1. User imports the models
+2. Cross-repository search for metaconfiguration files
+3. Reading configurations and links from the selected metaconfiguration file
+4. Cross-repository search of catalogs and topping files (based on metaconfiguration file)
+5. Reading the information from the topping files and generating the project
+
+</script></section><section data-markdown><script type="text/template">
+ 
+![uml](./assets/usabilityhub_model.png)
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Datasets and Baskets
+
+**Datasets** are sets of a specific spatial or thematic domain, independent of the model. 
+
+The data of a dataset can be managed, validated and exported independently from the other data.
+
+**Baskets** are mostly the combination of dataset and topic.
+
+See the [Model Baker Documentation](https://opengisch.github.io/QgisModelBaker/background_info/basket_handling/)
+
+</script></section><section data-markdown><script type="text/template">
+
+Model Baker offers the possibility to create new datasets and update existing datasets.
+
+![baskets_01](./assets/modelbaker_baskets_01.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+When entering data, you can choose between the available datasets.
+
+![baskets_02](./assets/modelbaker_baskets_02.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+To stay efficient here, you can set the default value in the Dataset Selector.
+
+![baskets_03](./assets/modelbaker_baskets_03.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+Individual datasets (or even baskets) can now be validated and exported.
+
+![baskets_04](./assets/modelbaker_baskets_04.png)
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Validator
+
+Easy validation of the physical data against the relevant INTERLIS model in a QGIS panel (no export needed).
+
+![validator](./assets/modelbaker_validator.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+The database connection parameters are output from the currently selected level.
+
+In case of multiple database sources used, it is possible to switch between validation results when switching levels.
+
+There are a number of ways to limit the validation.</script></section></section></div>
     </div>
 
     <script src="./dist/reveal.js"></script>
