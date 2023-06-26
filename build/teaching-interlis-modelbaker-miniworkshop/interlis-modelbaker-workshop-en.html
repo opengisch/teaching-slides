@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Interlis Modelbaker Miniworkshop</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="/_assets/stylesheets/softteaching-theme.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/base-theme.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/base-white-theme.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/logo_white.png" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/opengisch-bright.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/opengisch-dark.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/pitch-theme.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/softteaching-theme.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/teaching-theme.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+
+### Managing harmonized data in a model driven approach with
+
+<h1 style="color: var(--opengisch-light) !important;">INTERLIS and QGIS Model Baker</h1>
+</script></section><section ><section data-markdown><script type="text/template">
+<h1 style="-webkit-text-stroke: 2px var(--opengisch-light) !important; color: steelblue !important;">Dave Signer</h1>
+<h1 style="-webkit-text-stroke: 2px var(--opengisch-light) !important; color: var(--opengisch-green) !important;">@ OPENGIS.ch</h1>
+
+## BSc in IT(SE) @ ZHAW
+
+### Developer, Consultant, Coordinator
+
+<h3 style=" color: lightgrey !important;">Teacher and Storyteller</h1>
+
+<!-- .slide: data-background="assets/about-me.png" -->
+
+<aside class="notes">
+
+- Senior Software Engineer @OPENGIS.ch
+- Swiss company dedicated to OPEN SOURCE around 20 people
+- QGIS Core and Plugin Developer
+- Consultant in Data Modelling e.g. INTERLIS
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+### Goals
+
+- You **know what** INTERLIS is
+- You **know how** it's used
+- You **can handle it** in QGIS
+
+</script></section><section data-markdown><script type="text/template">
+
+### Program
+
+- What **is** INTERLIS? 🧑‍🏫
+- The **structure** of an INTERLIS Model 👪
+- The **tools** to handle it 🧑‍🏫
+- **Let's check it out** 👪
+- The power of **inheritances** 🪄
+- Further information 🧑‍🏫
+- **Questions**
+
+</script></section><section data-markdown><script type="text/template">
+
+### Data Download
+
+<p style="font-size:4em !important;"><b>t.ly/oMk1</b></p>
+
+<!-- https://drive.google.com/drive/folders/13vs3DXcJcUOHNC1i0UTicMNU5OmzMZCJ?usp=sharing -->
+
+</script></section><section data-markdown><script type="text/template">
+
+## Java
+
+Do I have it?
+```none
+java --version
+```
+
+&nbsp;
+
+###### Download for Windows / Mac
+Hier https://adoptium.net/de/
+
+&nbsp;
+
+##### Or in Linux (openJDK)
+
+```none
+sudo apt-get install openjdk-18-jre 
+```
+
+or
+
+```
+sudo apt install default-jre
+```
+</script></section></section><section ><section data-markdown><script type="text/template">
+## What is INTERLIS?
+
+</script></section><section data-markdown><script type="text/template">
+
+- **INTER** **L**and **I**nfomations **S**ystems
+- **Model** driven approach
+- A conceptional data description language with special consideration of **geodata**
+- **Readable** by humans and machines
+- **Object oriented** and extendable
+- System **neutral** (platform independent)
+- Strict division between the **transfer part** and the **modeling part**
+
+<aside class="notes">
+
+- **INTER** **L**and **I**nfomations **S**ystems > serves the cooperation of (Geographical) Information Systems. All systems involved should know the concepts and the rules.
+- That's the advantage of the Model driven approach, it's a **conceptual description language**, which describes the real world and defines the rules.
+- Is thus readable by humans as well as by machines and perfect as a base for discussion between IT nerds and thematic experts.
+- Object oriented since version 2 (common version is 2.3 although 2.4 is the current one). The fact that it is object oriented makes it perfect for data exchange between federal / cantonal offices, etc.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+### Why you could like INTERLIS
+
+You have your database schema **in your poket**.
+
+It's easy **readable** and **precice**.
+
+You're data are **harmonized** and in **high quality**.
+
+Thanks to the **tools**, it's easy to implement in your database and in **QGIS**.
+
+<aside class="notes">
+
+- **precice** > Means people / authorities know exactly what data are expected and you have immediate feedback, if the data are correct / as expected.
+- **high quality** > And since you exchange data files, you have one initial point of time where data is exchanged.
+- **tools** > Compared to e.g. SQL Scripts you can simply extend it.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+### Who uses it and how?
+
+![fishes](assets/fishes.png)
+
+<aside class="notes">
+
+It's AFAIK only used by Switzerland and Columbia. Switzerland is the fish swimming against the swarm of INSPIRE Europe.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+```mermaid
+%%{init: {'theme': 'dark' } }%%
+sequenceDiagram
+    participant S as Switzerland
+    participant G as Canton of Glarus
+    Note left of S: Defines a<br>Minimal Geo-Data Model<br/>Wildruhezonen_V1
+    S ->>+G: Provides model to the cantons
+    Note right of G: Collects data in the format of<br/>Wildruhezonen_V1
+    Note right of G: Validates data in the format of<br/>Wildruhezonen_V1
+    G ->>-S: Provides the data in the format of<br/>Wildruhezonen_V1
+    Note left of S: Validates data in the format of<br/>Wildruhezonen_V1
+```
+
+<aside class="notes">
+
+It's used in the data cooperation between the federal government and the cantonal autorities. Here with Wildlife Rest Areas.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+```mermaid
+%%{init: {'theme': 'dark' } }%%
+sequenceDiagram
+    participant S as Switzerland
+    participant G as Canton of Glarus
+    Note left of S: Defines a<br>Minimal Geo-Data Model<br/>Wildruhezonen_V1
+    S ->>+G: Provides model to the cantons
+    Note right of G: Defines model with additional properties<br/>GL_Wildruhezonen_V1
+    Note right of G: Collects data in the format of<br/>GL_Wildruhezonen_V1
+    Note right of G: Validates data in the format of<br/>GL_Wildruhezonen_V1
+    G ->>-S: Provides the data in the format of<br>Wildruhezonen_V1
+    Note left of S: Validates data in the format of<br/>Wildruhezonen_V1
+```
+
+<aside class="notes">
+
+And one big thing is that it's object-oriented. This means that, for example, the federal government defines a model that the cantonal authorities can derive and extend according to their needs.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+```mermaid
+%%{init: {'theme': 'dark' } }%%
+sequenceDiagram
+    participant S as Switzerland
+    participant G as Canton of Glarus
+    participant E as Engineer Office
+    Note left of S: Defines a<br>Minimal Geo-Data Model<br/>Wildruhezonen_V1
+    S ->>+G: Provides model to the cantons
+    Note right of G: Defines model with additional properties<br/>GL_Wildruhezonen_V1
+    G ->>+E: Provides model to the engineers
+    Note right of E: Defines their own model.
+    Note right of E: Collects data in the format of their own model
+    Note right of E: Validates data in the format of their own model
+    E ->>-G: Provides the data in the format of<br>GL_Wildruhezonen_V1
+    Note right of G: Validates data in the format of<br/>GL_Wildruhezonen_V1
+    G ->>-S: Provides the data in the format of<br>Wildruhezonen_V1
+    Note left of S: Validates data in the format of<br/>Wildruhezonen_V1
+```
+
+<aside class="notes">
+
+But let's have a look at extended / inheritance models later.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+<h1 style="-webkit-text-stroke: 2px var(--opengisch-dark) !important; color: lightgray !important;">The Good</h1><h5 style="-webkit-text-stroke: 1px var(--opengisch-light) !important;color: var(--opengisch-dark)!important;">If you go the INTERLIS way, it's nice and usefull.</h5>
+<h1 style="-webkit-text-stroke: 2px var(--opengisch-dark) !important; color: lightgray !important;">The Bad</h1><h5 style="-webkit-text-stroke: 1px var(--opengisch-light) !important;color: var(--opengisch-dark)!important;">You are forced to take the efford.</h5>
+<h1 style="-webkit-text-stroke: 2px var(--opengisch-dark) !important; color: lightgray !important;">And the Ugly</h1><h5 style="-webkit-text-stroke: 1px var(--opengisch-light) !important;color: var(--opengisch-dark)!important;">You tinker it into the environment and have bad results.</h5>
+
+<!-- .slide: data-background="assets/thegoodthebadandtheugly.png" -->
+
+<aside class="notes">
+
+Anyway, because of the mentioned advantages, INTERLIS has been *bindingly anchored in Swiss geoinformation legislation* since 2008. So we just HAVE TO use it.
+
+- The good: It's nice and usefull, when you use it this way.
+- The bad: You are forced to take the efford.
+- And the ugly: If you decide to not use the INTERLIS functionality internal and just tinker and export-functionality to INTERLIS and receive bad results. Then poor you to search your geometry errors according to a log file.
+
+</aside>
+</script></section></section><section ><section data-markdown><script type="text/template">
+## The structure of INTERLIS
+
+<aside class="notes">
+
+I don't want to go to deep into all the possiblities and the syntax of the language because of time reasons, so let's have a look at our use case.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+## Model file and transfer data file
+
+The model is defined in INTERLIS language and stored in an `.ili` file.
+
+The data is in xml (considering the model) and stored as an `.xtf` file (former `.itf`).
+
+<aside class="notes">
+
+First of all...
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+## The Data Model
+
+```mermaid
+%%{init: {'theme': 'dark' } }%%
+
+erDiagram
+  BUILDING{
+    text Name
+    geom Geometry
+    enum District
+    number ConstructionYear
+    number Levels
+    bool Shelter
+    enum Heating
+    date DateHeating
+  }
+  APARTMENT{
+    text Description 
+    number Level
+    number Rooms
+    bool Sanitary
+  }
+  BUILDING O|--O{ APARTMENT : "one-to-many"
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## Model file
+
+![structure](assets/interlis_model_structure.png){ style="display: block; margin: 0 auto" }
+
+<aside class="notes">
+
+With Topics you can structure your model into *thematic units* and handle them seperately for example when importing / exporting data.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+## Check out the model file
+
+... our INTERLIS model `ResidentialPlanning_V0`
+
+</script></section><section data-markdown><script type="text/template">
+
+## ... and make it complete
+
+- Create the class `Appartment`
+
+  ```mermaid
+  %%{init: {'theme': 'dark' } }%%
+  erDiagram
+    APARTMENT{
+      text Description 
+      number Level
+      number Rooms
+      bool Sanitary
+    }
+  ```
+
+- Create the association `BuildingApartment`
+- Rename the model from `ResidentialPlanning_V0` to `ResidentialPlanning_V1`
+</script></section></section><section ><section data-markdown><script type="text/template">
+## The tools to handle it
+
+<aside class="notes">
+
+So we have the model and what is next. Let's see what kind of tools we use.
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+## Work with INTERLIS
+
+![workflow](assets/interlis_workflow.png)
+(graphic by landnetwork.ch)
+
+</script></section><section data-markdown><script type="text/template">
+
+## ili2 Tools (ilitools)
+
+<aside class="notes">
+
+made by Eisenhut Informatik
+
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+### Compiler ili2c
+
+... **checks** the **model** if the constructs of INTERLIS are correctly applied.
+
+<https://www.interlis.ch/downloads/ili2c>
+
+<aside class="notes">
+
+It reports syntactic errors in the model with the line number so that they can be corrected by the modeler.
+</aside>
+
+</script></section><section data-markdown><script type="text/template">
+
+### ili2db
+
+... creates a **physical database** (PostgrSQL/PostGIS, GeoPackage oder ESRI FileGDB) from an INTERLIS model.
+
+... imports / exports an INTERLIS **transfer file**.
+
+<https://www.interlis.ch/downloads/ili2db>
+
+</script></section><section data-markdown><script type="text/template">
+
+### ilivalidator
+
+... **checks** whether the **data** match the associated model and its constraints.
+
+<https://www.interlis.ch/downloads/ilivalidator>
+
+</script></section><section data-markdown><script type="text/template">
+
+## QGIS Model Baker
+
+![modelbaker](./assets/modelbakerplugin.png)
+
+- controls those **ilitools** from QGIS
+- **generates** QGIS projects
+
+<aside class="notes">
+
+Especially if the database schema is based on INTERLIS, it can be easily generated into a QGIS project with model baker.
+Very simple structures (like tables without references) can also be opened in QGIS.
+Quite complex structures still require an implementation specialized on this spesific request.
+But a lot can be easily solved by Model Baker.
+... and btw. it lets you handle **baskets** etc. in QGIS
+
+</aside>
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Let's do it
+
+</script></section><section data-markdown><script type="text/template">
+
+## Excercise Adding Data
+
+- Add a building, add appartments linked to buildings.
+- Add a building with a heating but without heating date.
+- Create a geometrical mistake (e.g. an intersection).
+</script></section></section><section ><section data-markdown><script type="text/template">
+## The power of inheritances
+
+</script></section><section data-markdown><script type="text/template">
+
+## Use Case
+
+<aside class="notes">
+
+ Here we are again. For example, the federal government defines a model that the cantonal authorities can derive and extend according to their needs.
+
+ But let's have a look at a simpler case - our case.
+
+</aside>
+
+```mermaid
+%%{init: {'theme': 'dark' } }%%
+sequenceDiagram
+    participant S as Switzerland
+    participant G as Canton of Glarus
+    Note left of S: Defines a<br>Minimal Geo-Data Model<br/>Wildruhezonen_V1
+    S ->>+G: Provides model to the cantons
+    Note right of G: Defines model with additional properties<br/>GL_Wildruhezonen_V1
+    Note right of G: Collects data in the format of<br/>GL_Wildruhezonen_V1
+    Note right of G: Validates data in the format of<br/>GL_Wildruhezonen_V1
+    G ->>-S: Provides the data in the format of<br>Wildruhezonen_V1
+    Note left of S: Validates data in the format of<br/>Wildruhezonen_V1
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+```mermaid
+%%{init: {'theme': 'dark' } }%%
+sequenceDiagram
+    participant A as Authority
+    participant E as Engineers
+    Note left of A: Defines a<br>Minimal Geo-Data Model<br/>ResidentialPlanning_V1
+    A ->>+E: Provides model
+    Note right of E: Defines model with additional eco-info<br/>EcoResidentialPlanning_V1
+    Note right of E: Collects data in the format of<br/>EcoResidentialPlanning_V1
+    Note right of E: Validates data in the format of<br/>EcoResidentialPlanning_V1
+    E ->>-A: Provides the data in the format of<br/>ResidentialPlanning_V1
+    Note left of A: Validates data in the format of<br/>ResidentialPlanning_V1
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+### What we need
+
+```mermaid
+%%{init: {'theme': 'dark' } }%%
+
+erDiagram
+  BUILDING{
+    text Name
+    geom Geometry
+    enum District
+    number ConstructionYear
+    number Levels
+    bool Shelter
+    enum Heating
+    date DateHeating
+  }  
+  EXTENDED_BUILDING{
+    text Name
+    geom Geometry
+    enum District
+    number ConstructionYear
+    number Levels
+    bool Shelter
+    enum Heating
+    date DateHeating
+    text PowerSupply
+    date DatePowerSupply
+    text Isolation
+    date DateIsolation
+    bool CorrespondsStandard
+  }  
+
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## Model Syntax
+
+<pre><code class="plaintext" data-line-numbers="*|4|6|8|9-12,14-16|13|17-18">MODEL EcoResidentialPlanning_V1 (en)
+AT "mailto:signedav@localhost"
+VERSION "2023-06-05" =
+  IMPORTS ResidentialPlanning_V1;
+
+  TOPIC Residences EXTENDS ResidentialPlanning_V1.Residences =
+
+    CLASS Building (EXTENDED) =
+      PowerSupply: TEXT;
+      DatePowerSupply : INTERLIS.XMLDate;
+      Isolation: TEXT;
+      DateIsolation : INTERLIS.XMLDate;
+      Name (EXTENDED) : MANDATORY TEXT;
+
+      CorrespondsStandard: BOOLEAN;
+
+      SET CONSTRAINT WHERE CorrespondsStandard :
+          ConstructionYear > 1920;
+
+    END Building;
+
+  END Residences;
+
+END EcoResidentialPlanning_V1.
+</code></pre>
+
+</script></section><section data-markdown><script type="text/template">
+
+## Demo 🪄
+
+</script></section><section data-markdown><script type="text/template">
+
+## Excercise SmartInheritance
+
+What happens on when you choose Smart1Inheritance instead?
+![smart1](assets/smart1.png)
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Further information
+
+</script></section><section data-markdown><script type="text/template">
+
+## Swiss Model Repositories
+
+![repository_netzwerk](./assets/repositories.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+#### On every repo there is a
+
+&nbsp;
+
+#### ... index file `ilimodels.xml`
+
+- Contains model names and a **file path**.
+- The **files** are located in the same repository
+
+&nbsp;
+
+#### ... linking file `ilisites.xml`
+
+- Contains **paths** to other repositories
+
+</script></section><section data-markdown><script type="text/template">
+
+## Data Repository / UsabILIty Hub
+
+Receive meta data like ***ili2db settings***, ***layer styles*** and ***orders*** etc. automatically over the web.
+
+Just as we can receive models via an ilimodels.xml, we can receive meta information via an ilidata.xml
+</script></section></section><section  data-markdown><script type="text/template">
+## Links
+
+- INTERLIS Documentation <https://www.interlis.ch/en/dokumentation/interlis-2>
+- QGIS Model Baker Documentation <https://opengisch.github.io/QgisModelBaker/>
+</script></section><section  data-markdown><script type="text/template">
+<h1 style="-webkit-text-stroke: 2px var(--opengisch-dark) !important; color: lightgray !important; font-size:3em !important">Questions?</h1>
+
+<!-- .slide: data-background="assets/questions.png" -->
+</script></section><section  data-markdown><script type="text/template">
+### That's it
+
+#### Web: www.opengis.ch
+
+#### Email: <david@opengis.ch>
+
+#### Github: github.com/opengisch
+
+#### Mastodon: @signedav@fosstodon.org
+</script></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
