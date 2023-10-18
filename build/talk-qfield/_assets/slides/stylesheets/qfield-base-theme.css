@@ -2,6 +2,7 @@
 /* @theme base-theme */
 
 @import "qfield-base-white-theme.css";
+@import url(https://use.typekit.net/kve4lwn.css);
 
 :root {
     --opengisch-green: hsl(88, 67%, 48%);
@@ -64,6 +65,7 @@ body:after {
 .reveal h5,
 .reveal h6 {
   text-transform: none;
+  font-family: "futura-pt", 'Helvetica';
 }
 
 /* Ensure certain elements are never larger than the slide itself */
