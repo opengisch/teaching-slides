@@ -1,7 +1,7 @@
 /* base-theme.css */
 /* @theme base-theme */
 
-@import "base-white-theme.css";
+@import "qfield-base-white-theme.css";
 
 :root {
     --opengisch-green: hsl(88, 67%, 48%);
