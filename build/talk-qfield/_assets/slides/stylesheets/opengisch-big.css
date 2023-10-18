@@ -1,0 +1,68 @@
+@import url(https://use.typekit.net/kve4lwn.css);
+
+body {
+  font-family: "futura-pt", 'Helvetica';
+  letter-spacing:-1px;
+  background-size: 100%;
+  margin:0;
+  padding:0;
+  font-weight:bold;
+  background-repeat: no-repeat;
+}
+
+body.with_logo {
+    background-position-x: right;
+    background-position-y: -100%;
+    background-size: 30%;
+    background-repeat: no-repeat;
+}
+
+body.no_logo {
+    background-image:none;
+}
+
+body.normal_spacing {
+  letter-spacing: normal;
+}
+
+h1, h2, h3, p {
+  margin:0;
+}
+
+em, a {
+  font-style:normal;
+}
+
+blue_stroke {
+  -webkit-text-stroke: 4px #2880cc; 
+}
+
+green_stroke {
+  -webkit-text-stroke: 4px #80CC28; 
+}
+
+a {
+  text-decoration:none;
+}
+
+img {
+  width:100%;
+
+}
+
+
+div {
+  cursor:pointer;
+  cursor:hand;
+  position:absolute;
+  top:0;
+  left:0;
+  padding: 0 50px;
+}
+video {
+    margin: 20px auto;
+}
+
+.footer_title{
+    margin-top: 75%;
+}
