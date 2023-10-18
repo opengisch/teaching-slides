@@ -1,7 +1,7 @@
-/* pitch-theme.css */
-/* @theme pitch-theme*/
+/* qfield-theme.css */
+/* @theme qfield-theme*/
 
-@import 'base-theme.css';
+@import 'qfield-base-theme.css';
 
 :root {
     --r-background-color: var(--opengisch-green);
