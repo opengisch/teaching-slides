@@ -22,10 +22,15 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides"><section  data-markdown><script type="text/template">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
 
 ![Logo](./assets/modelbaker_logo.png)
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ### Abstract
 
 **Model Baker** ist ein **QGIS Plugin**, mit dem sich Projekte aus einem **INTERLIS** Modell erzeugen lassen. **Model Baker** verwendet **ili2db**, um ein Modell in eine **physische Datenbank** zu importieren und zusätzliche Metainformationen, um **Legende, Formulare, Relationen und vieles mehr** automatisch zu konfigurieren. Es ist **Open Source** und frei verfügbar.
@@ -33,7 +38,9 @@
 <aside class="notes">
 Add some test notes for speaker view.
 </aside>
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ### INTERLIS Geodatenmodel
 
 <!-- INTERLIS Geodatenmodelle lokal oder auf dem Repository. -->
@@ -90,13 +97,17 @@ VERSION "2020-04-21"  =
   END Wildruhezonen;
 END Wildruhezonen_LV95_V2_1.
 ```
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ### Model Baker findet Infos
 
 ![wizard](./assets/modelbaker_wizard.png)
 
 <!-- Model Baker findet die relevanten Informationen und erstellt mithilfe von ili2db die Datenbank.-->
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ### QGIS Projekt wird generiert
 
 <!-- Datenbank und INTERLIS Metadaten werden analysiert, um ein QGIS Projekt mit Legende, Formularen, Relationen etc. automatisch zu generieren.-->
@@ -104,7 +115,10 @@ END Wildruhezonen_LV95_V2_1.
 ![projekt](./assets/modelbaker_projekt.png)
 
 
-</script></section></div>
+
+          </textarea>
+        </section>
+      </div>
     </div>
 
     <script src="./dist/reveal.js"></script>
@@ -148,7 +162,7 @@ END Wildruhezonen_LV95_V2_1.
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Modelbaker Pitch","css":"slides/stylesheets/base-theme.css,slides/stylesheets/base-white-theme.css,slides/stylesheets/opengisch-bright.css,slides/stylesheets/opengisch-dark.css,slides/stylesheets/pitch-theme.css,slides/stylesheets/softteaching-theme.css,slides/stylesheets/teaching-theme.css"}, queryOptions);
     </script>
 
 

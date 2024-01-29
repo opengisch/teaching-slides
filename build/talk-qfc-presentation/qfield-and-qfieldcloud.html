@@ -22,33 +22,40 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides"><section  data-markdown><script type="text/template">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
 
 ## QFieldCloud
-</script></section><section ><section data-markdown><script type="text/template">
+
+---
+
 #### Abonnements
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ![abonnements](assets/abonnements2.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Pour des projets privés en collaboration, une *Organisation* est nécessaire.
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 #### Plan *Organisation* QFC
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Les utilisateurs s’inscrivent eux avec un plan *Community* et l’utilisateur qui a créé l’*Organisation* (l'administrateur) les ajoute comme membres.
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ![membre](assets/membres.png)
 
 Admin ou membre
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Ensuite il est possible de gérer des équipes (teams)
 
@@ -56,17 +63,19 @@ Ensuite il est possible de gérer des équipes (teams)
 
 Par exemple terrain, lecture seul,...
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Ajouter les teams ou membres dans les collaborateurs du projet.
 
 Attribuer un rôle sur le projet.
 
 ![rôle projet](assets/role_projet.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 #### Projets
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Synchronisation du projet depuis QGIS avec QFieldSync
 
@@ -74,49 +83,60 @@ ou création directement sur QFC
 
 ![créer projet QFC](assets/creer_projet_qfc.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Transférer la propriété du projet à l’organisation. 
 
 ![transfert propriété](assets/transfert_propriete.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 #### POSTGIS
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Utilisation du pg_service.conf sur QFC et les devices
 
 ![postgis secrets](assets/postgis_secrets.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Configurer un projet QGIS avec des données POSTGIS
 
 Utilisation de QFieldSync pour télécharger sur le cloud
 
 ![qfield sync](assets/qfield_sync2.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 #### Conditions d’utilisation
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Les conditions d’utilisation se trouvent sous “Terms of service” en bas de page de QFC https://qfield.cloud/tos.html
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 #### Hébergement
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 QFC est hébergé en Suisse
 
 ![suisse](assets/suisse.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 #### Solution sur serveur privé
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Déjà possible, le projet est open source
 
-Une offre pour qu' OPENGIS.ch s’occupe de l’installation va bientôt arriver</script></section></section></div>
+Une offre pour qu' OPENGIS.ch s’occupe de l’installation va bientôt arriver
+          </textarea>
+        </section>
+      </div>
     </div>
 
     <script src="./dist/reveal.js"></script>
@@ -160,7 +180,7 @@ Une offre pour qu' OPENGIS.ch s’occupe de l’installation va bientôt arriver
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qfc Presentation","css":"slides/stylesheets/base-theme.css,slides/stylesheets/base-white-theme.css,slides/stylesheets/opengisch-bright.css,slides/stylesheets/opengisch-dark.css,slides/stylesheets/pitch-theme.css,slides/stylesheets/softteaching-theme.css,slides/stylesheets/teaching-theme.css"}, queryOptions);
     </script>
 
 

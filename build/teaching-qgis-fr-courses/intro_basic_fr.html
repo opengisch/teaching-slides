@@ -22,33 +22,36 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides"><section ><section data-markdown><script type="text/template">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
 
 # QGIS cours de base
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## Qui suis-je ?
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ### Lucie Nicolier
 
 #### Bachelor en géomatique et gestion du territoire @HEIG-VD
 #### Experte SIG
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## Qui sommes-nous ?
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ![](./assets/social_distancing_love_os.png)
 
 #### Open source Geoninjas
 ##### Made in Switzerland
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## Ce que nous faisons
 
@@ -56,7 +59,7 @@
 #### Du support
 #### De l'enseignement
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## Comment ?
 #### - flexible
@@ -64,14 +67,16 @@
 #### - Open Source
 #### - haut standards de qualité suisse
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## Qui êtes-vous ?
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ## Objectifs du cours
 À la fin de ce cours, vous connaîtrez les principales fonctionnalités de QGIS Desktop, vous serez en mesure d'importer et de modifier les données, de créer une carte avec une mise en page d'impression professionnelle et de numériser des éléments avec des attributs et une géométrie.
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## Contenu du cours (1)
  -  Introduction
@@ -83,7 +88,7 @@
  -  Configuration basique de formulaire d’attributs
  -  Symbologie et étiquetage
   
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## Contenu du cours (2)
  -  Expressions simples dans l'éditeur des expressions 
@@ -95,7 +100,7 @@
  -  Analyse simple de données vectorielles
  -  Création d'une mise en page
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## Programme
 
@@ -112,12 +117,14 @@ Repas de midi
 Pause
 
 15.00-16.30 QGIS
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ## Projet QGIS
 
 ![QGIS](./assets/qgis.jfif)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## A propos de QGIS
 
@@ -125,7 +132,7 @@ Pause
 - Tourne sur Linux, Unix, Mac OSX, Windows et Android
 - Supporte de nombreux formats vectoriel, raster et des bases de données et nombreuses fonctionnalités
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## QGIS est un logiciel libre et open source
 
@@ -133,13 +140,13 @@ Pause
 - Le produit est remplacé par le projet
 - Toutes les modifications peuvent être faites, mais doivent être rendues accessibles si des projets/produits dérivés sont vendus
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ## La communauté
 
 ### Projet mené par des bénévoles
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ### Contribuer 
 
@@ -152,7 +159,7 @@ Pause
 
 <https://qgis.org/de/site/getinvolved/index.html>
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ### Les fonctionnalités principales (1)
 
@@ -162,7 +169,7 @@ Pause
 -  Importer/exporter des données
 -  Analyser des données
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ### Les fonctionnalités principales (2)
 
@@ -172,7 +179,7 @@ Pause
    -  Extensions Python externes
 -  Console Python
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ### Support commercial
 
@@ -180,7 +187,10 @@ Pause
 
 Nous offrons du support, de la formation et du développement pour votre stack SIG open source. 
 
-Nos développeurs principaux QGIS sont expérimentés en C++, Python, SQL, analyse de géodonnées, développement mobile  (Android, iOS, Windows) et bien plus.</script></section></section></div>
+Nos développeurs principaux QGIS sont expérimentés en C++, Python, SQL, analyse de géodonnées, développement mobile  (Android, iOS, Windows) et bien plus.
+          </textarea>
+        </section>
+      </div>
     </div>
 
     <script src="./dist/reveal.js"></script>
@@ -224,7 +234,7 @@ Nos développeurs principaux QGIS sont expérimentés en C++, Python, SQL, analy
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qgis Fr Courses","css":"slides/stylesheets/base-theme.css,slides/stylesheets/base-white-theme.css,slides/stylesheets/opengisch-bright.css,slides/stylesheets/opengisch-dark.css,slides/stylesheets/pitch-theme.css,slides/stylesheets/softteaching-theme.css,slides/stylesheets/teaching-theme.css"}, queryOptions);
     </script>
 
 

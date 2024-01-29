@@ -22,23 +22,32 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides"><section  data-markdown><script type="text/template">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
 
 ![Logo](./assets/modelbaker_logo.png)
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 <!-- I might sound like a nerd, but in fact you can get addicted to it. Sometimes ideas appear to model everything in INTERLIS. It's a common thing when you have to do with people using INTERLIS. In fact I thought about to make this presentation (and an abstract and extended version of it) in INTERLIS. -->
 
 # What is MODEL BAKER?
 While INTERLIS is the hard stuff ...
 
 ... MODEL BAKER is the beginner drug
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ## A QGIS Project Generator
 
 Quickly **creates a QGIS project** from a physical data model. 
 
 Analyzes the existing structure and configures a QGIS project with all available information. 
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ## A QGIS Project Generator optimized for INTERLIS
 
 Models defined in INTERLIS provide **additional meta information** like domains, units of attributes or object oriented definitions of tables.
@@ -46,7 +55,9 @@ Models defined in INTERLIS provide **additional meta information** like domains,
 This can be used to further optimize the project configuration. 
 
 <!-- Model Baker can use the meta information to configure layer tree, field widgets with conditions, form layouts, relations and much more.-->
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ## An ili2db controll station
 
 ```
@@ -60,7 +71,9 @@ java -jar /home/dave/dev/opengisch/QgisModelBaker/QgisModelBaker/libili2db/bin/i
 <!-- It provides the user only the needed settings to pass parameters to the ili2db.
 Creates the commando for ili2db.
 -->
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ## And it's a library
 
 Can be used as a framework.
@@ -70,7 +83,9 @@ Like [Asistente LADM-COL](https://github.com/SwissTierrasColombia/Asistente-LADM
 <!--
 Model Baker can be used as a framework for other projects. The plugin [Asistente LADM-COL](https://github.com/SwissTierrasColombia/Asistente-LADM-COL), created for the [Colombian implementation of the Land Administration Domain Model (LADM)](https://www.proadmintierra.info/), uses the Model Baker as a library to implement as much of the specific solution as possible as QGIS core functionality.
 -->
-</script></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ## Check it out now
 
 <!--
@@ -83,30 +98,32 @@ Model Baker can be used as a framework for other projects. The plugin [Asistente
 - Show validation and export
 -->
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 The smart Workflow Wizard guides you through the required use cases.
 
 ![w01](./assets/modelbaker_wizard_01.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Easypeasy drag'n'drop of the files to be imported.
 
 ![w02](./assets/modelbaker_wizard_02.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Already imported models are recognized. As well as models required by the transfer files.
 
 ![w03](./assets/modelbaker_wizard_03.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Users keep the complete control over the ili2db commands.
 
 ![w04](./assets/modelbaker_wizard_04.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ## What is the UsabILIty Hub?
 Receive meta data like ***ili2db settings***, ***layer styles*** and ***orders*** etc. automatically over the web. 
 
@@ -114,14 +131,14 @@ Just as we can receive INTERLIS models via an ilimodels.xml using http://models.
 
 See the [Model Baker Documentation](https://opengisch.github.io/QgisModelBaker/background_info/usabilityhub/modelbaker_integration/) and https://usabilityhub.opengis.ch
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ### Metaconfiguration and Toppings
 Settings for tools are configured in a metaconfiguration file, as well as links to topping files that contain information about QGIS project.
 
 ***Thus, this additional information usually consists of a metaconfiguration and any number of toppings.***
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 ### Workflow in Model Baker
 
@@ -131,10 +148,12 @@ Settings for tools are configured in a metaconfiguration file, as well as links 
 4. Cross-repository search of catalogs and topping files (based on metaconfiguration file)
 5. Reading the information from the topping files and generating the project
 
-</script></section><section data-markdown><script type="text/template">
+--v--
  
 ![uml](./assets/usabilityhub_model.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ## Datasets and Baskets
 
 **Datasets** are sets of a specific spatial or thematic domain, independent of the model. 
@@ -145,43 +164,48 @@ The data of a dataset can be managed, validated and exported independently from 
 
 See the [Model Baker Documentation](https://opengisch.github.io/QgisModelBaker/background_info/basket_handling/)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Model Baker offers the possibility to create new datasets and update existing datasets.
 
 ![baskets_01](./assets/modelbaker_baskets_01.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 When entering data, you can choose between the available datasets.
 
 ![baskets_02](./assets/modelbaker_baskets_02.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 To stay efficient here, you can set the default value in the Dataset Selector.
 
 ![baskets_03](./assets/modelbaker_baskets_03.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 Individual datasets (or even baskets) can now be validated and exported.
 
 ![baskets_04](./assets/modelbaker_baskets_04.png)
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+---
+
 ## Validator
 
 Easy validation of the physical data against the relevant INTERLIS model in a QGIS panel (no export needed).
 
 ![validator](./assets/modelbaker_validator.png)
 
-</script></section><section data-markdown><script type="text/template">
+--v--
 
 The database connection parameters are output from the currently selected level.
 
 In case of multiple database sources used, it is possible to switch between validation results when switching levels.
 
-There are a number of ways to limit the validation.</script></section></section></div>
+There are a number of ways to limit the validation.
+          </textarea>
+        </section>
+      </div>
     </div>
 
     <script src="./dist/reveal.js"></script>
@@ -225,7 +249,7 @@ There are a number of ways to limit the validation.</script></section></section>
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Interlis Presentation","css":"slides/stylesheets/base-theme.css,slides/stylesheets/base-white-theme.css,slides/stylesheets/opengisch-bright.css,slides/stylesheets/opengisch-dark.css,slides/stylesheets/pitch-theme.css,slides/stylesheets/softteaching-theme.css,slides/stylesheets/teaching-theme.css"}, queryOptions);
     </script>
 
 

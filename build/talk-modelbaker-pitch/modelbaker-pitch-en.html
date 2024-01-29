@@ -22,14 +22,21 @@
   </head>
   <body>
     <div class="reveal">
-      <div class="slides"><section  data-markdown><script type="text/template">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
 
 ![Logo](./assets/modelbaker_logo.png)
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ### Abstract
 
 **Model Baker** is a **QGIS plugin** that can be used to create projects from an **INTERLIS** model. **Model Baker** uses **ili2db** to import a model into a **physical database** and additional meta information to automatically configure **layer tree, forms, relations and more**. It is **open source** and freely available.
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ### INTERLIS Geodatamodel
 
 <!-- We have **INTERLIS** geodata models locally or on an online repository.-->
@@ -83,13 +90,17 @@ VERSION "2020-04-21"  =
       WRZ_Teilobjekt -- {1..*} Wildruhmodel
 END Wildruhezonen_LV95_V2_1.
 ```
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ### Model Baker gets the info
 
 ![wizard](./assets/modelbaker_wizard.png)
 
 <!-- **Model Baker** finds the relevant information and creates the database using **ili2db**.-->
-</script></section><section  data-markdown><script type="text/template">
+
+---
+
 ### QGIS Project is generated
 
 <!-- Database and INTERLIS metadata are analyzed to automatically configure a QGIS project with layertree, forms, relations and much more.-->
@@ -97,7 +108,10 @@ END Wildruhezonen_LV95_V2_1.
 ![projekt](./assets/modelbaker_projekt.png)
 
 
-</script></section></div>
+
+          </textarea>
+        </section>
+      </div>
     </div>
 
     <script src="./dist/reveal.js"></script>
@@ -141,7 +155,7 @@ END Wildruhezonen_LV95_V2_1.
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Modelbaker Pitch","css":"slides/stylesheets/base-theme.css,slides/stylesheets/base-white-theme.css,slides/stylesheets/opengisch-bright.css,slides/stylesheets/opengisch-dark.css,slides/stylesheets/pitch-theme.css,slides/stylesheets/softteaching-theme.css,slides/stylesheets/teaching-theme.css"}, queryOptions);
     </script>
 
 
