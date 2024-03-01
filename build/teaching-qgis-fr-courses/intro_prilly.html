@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="./_assets/slides/stylesheets/pitch-theme.css" />
     <link rel="stylesheet" href="./_assets/slides/stylesheets/softteaching-theme.css" />
     <link rel="stylesheet" href="./_assets/slides/stylesheets/teaching-theme.css" />
-
   </head>
   <body>
     <div class="reveal">
@@ -182,6 +181,8 @@ Nos développeurs principaux QGIS sont expérimentés en C++, Python, SQL, analy
 
     <script src="./dist/reveal.js"></script>
 
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
     <script src="./plugin/markdown/markdown.js"></script>
     <script src="./plugin/highlight/highlight.js"></script>
     <script src="./plugin/zoom/zoom.js"></script>
@@ -209,6 +210,9 @@ Nos développeurs principaux QGIS sont expérimentés en C++, Python, SQL, analy
         center: true,
         transition: 'default', // none/fade/slide/convex/concave/zoom
         slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
         plugins: [
           RevealMarkdown,
           RevealHighlight,
@@ -227,6 +231,20 @@ Nos développeurs principaux QGIS sont expérimentés en C++, Python, SQL, analy
 
     <script>
       Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) { mermaid.init(mermaidOptions, '.stack.present>.present pre code.mermaid'); };
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
     </script>
   </body>
 </html>
