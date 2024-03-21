@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Qfield3</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./_assets/stylesheets/pitch-theme.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/base-theme.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/base-white-theme.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/opengisch-bright.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/opengisch-dark.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/pitch-theme.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/softteaching-theme.css" />
+    <link rel="stylesheet" href="./_assets/slides/stylesheets/teaching-theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
+
+# QField 3 - Feldarbeit neu definiert
+![]('https://talks.opengis.ch/qfield/images/congo.jpg')
+
+---
+
+![](https://talks.opengis.ch/assets/images/about_us.jpg')
+
+---
+
+## 2.7 - Heroic Hedgehog
+
+![](https://user-images.githubusercontent.com/1728657/224213255-e51e619a-2505-49dc-a03d-088bfa2530e4.png)
+
+---
+
+## 🚀 Features
+
+*   Map canvas rotation support (via pinch rotation gesture and mouse middle button)
+*   Audio and video attachment recording and playback within the feature form
+*   File attachment support added to the feature form
+*   User interface dark theme styling and font scaling
+*   A completely revamped non-native camera featuring zoom support, flash toggle, **GPS location metadata**, and a much better interface
+*   New action to import a dataset of compressed project from a remote URL
+
+---
+
+## 2.8 - Insightful Indri
+
+![](https://user-images.githubusercontent.com/1728657/238116107-1792bb88-9fdb-41e7-9716-7fd65f8837ce.png)
+
+---
+
+### 🚀 Features
+
+*   Sensors data handling (reading, writing to feature, tracking) within QField
+*   Skip the welcome screen and jump right into your last opened - or user-specified - project when launching QField
+*   IMU correction for supported Happy GNSS devices
+*   Global map shading rendering support
+
+---
+
+![](https://cdn.fosstodon.org/media_attachments/files/111/565/980/420/657/216/original/9ad768ef08e48eab.jpeg)
+
+---
+
+![](https://talks.opengis.ch/qfield/images/sensors.jpg)
+
+---
+
+### ✨ Improvements
+
+*   Handle opening of individual datasets with mixed geometry layers
+*   Feature lists are now sorted, everywhere
+*   Feature form’s field labels will now respect the color and style overrides defined in project files
+*   File association to support opening .mbtiles standalone datasets
+
+---
+
+  ![](https://pbs.twimg.com/media/GB2dz66W8AAXDcX?format=jpg&name=large)
+
+---
+
+## 3.0.0 - Amazonia
+
+![](https://user-images.githubusercontent.com/1728657/273355394-ea4dcbc3-00f2-485b-b505-480d58d0d221.png)
+
+---
+
+### 🚀 Features - General
+
+*   Near-Field Communication (NFC) text tag reading support
+*   The welcome screen’s recent projects list is now equipped with a map canvas preview
+*   New active layer feature search functionality in the top search bar
+*   New map canvas rendering quality setting to unlocked faster rendering speeds and lower memory usage at the cost of a slightly rendering quality reduction
+*   A list of feature(s) under which a long press has occurred is now appended to the map canvas menu with action shortcuts---
+
+---
+
+### 🚀 Features - General continued
+*   Relationship-related editor widgets now allows for zooming onto the child/parent within the feature form
+*   Layer credits are now displayed within the layer properties panel when available in opened projects
+*   Imperial and nautical scale bar support
+*   Feature form text widget support
+*   Point cloud profiles
+
+---
+
+![](https://talks.opengis.ch/qfield/images/pointcloud.jpg)
+
+---
+
+### 🚀 Features - Tracking
+
+*   New erroneous position safeguard defined as a maximum distance threshold
+*   Resumption of tracking across sessions
+
+--- 
+
+![](https://www.opengis.ch/wp-content/uploads/2024/03/session.png)
+
+---
+
+### 🚀 Features - Digitizing continued
+
+*   New snapping button which allows users to toggle snapping on/off while digitizing
+*   New legend snapping badges when project is set up to advanced snapping mode
+*   Digitizing of geometry vertices through volume keys
+*   Brand new geometry editor’s eraser tool allowing users to remove parts of a geometry by drawing areas of deletion
+
+---
+
+### ✨ Improvements - Qt6
+
+*   Dramatically improved Material theme used to style UI elements such as combo boxes
+*   Improved dark theme color scheme
+*   Improved internal positioning handling of satellite information
+*   Years worth of fixes and improves when compared to the previously used version
+
+---
+
+### ✨ Improvements - Quality of life
+
+*   The value relation editor widget has received several fixes and UX improvements
+*   When duplicating features, users are now asked to move the duplicated feature immediately
+*   Duplication of features will now copy any children of any existing relationships set to composition strength
+*   Missing project fonts are now downloaded in the background and automatically added into QField---
+
+---
+
+### ✨ Improvements - Quality of life
+*   Labels visibility on vector tile layers can now be toggle on/off
+*   QField now exports layouts as PDFs on iOS
+*   Improvements in the handling of altitude with external GNSS receivers
+*   Countless optimizations have made QField’s UI smoother than ever
+
+---
+
+## 3.1.0 - Borneo
+
+![](https://user-images.githubusercontent.com/1728657/287987844-8d7c6540-c32c-4d62-bf6e-1636a011567f.png)
+
+---
+
+### 🚀 Features
+
+*   QField can now snap to common angles when digitizing lines and polygons
+*   Expression-driven locking of geometry per feature
+*   QField's QML camera now adds direction metadata alongside geographical information
+*   QField's QML also features a grid overlay---
+
+---
+
+### 🚀 Features continued
+*   Vertex editor has again a new undo mechanism and capability to select a vertex by finger tapping on the screen
+*   `@positioning_orientation` variable available when running on devices equipped with a compass
+*   Functionality to allow for non-cloud projects to be updated through a ZIP file containing refreshed and/or new datasets and project file
+
+---
+
+## 3.2.0 - Congo (Latest)
+
+![](https://private-user-images.githubusercontent.com/1728657/310742115-bedae1db-c12e-498c-92f0-d29033ed688d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTEwMTk4MTAsIm5iZiI6MTcxMTAxOTUxMCwicGF0aCI6Ii8xNzI4NjU3LzMxMDc0MjExNS1iZWRhZTFkYi1jMTJlLTQ5OGMtOTJmMC1kMjkwMzNlZDY4OGQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MDMyMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDAzMjFUMTExMTUwWiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9NjBiMDdkZjIxN2U3NzNiNThlZDg1ZDc1YzYxOTgxNDFlNDg2NGUxZWU0ODc0Njg5N2IyYmU3NmViMWYwMDFlZCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmYWN0b3JfaWQ9MCZrZXlfaWQ9MCZyZXBvX2lkPTAifQ.wV4XuTE-ENDvqxabL36ADEjdlUk5HgVTp6w-SJ6rDN8)
+
+---
+
+### 🚀 Features
+
+*   Project-defined tracking sessions activated on project load
+*   Background push and synchronization for cloud projects
+*   Automatically push pending changes to the cloud on a regular interval
+*   New undo/redo functionality allowing you to reverse undesired digitizing and feature editing
+*   Title and copyright decoration overlay on top of the map canvas
+
+---
+
+![](https://www.opengis.ch/wp-content/uploads/2024/03/session.png)
+
+---
+
+### ✨ Improvements
+
+*   Better progress feedback when downloading and synchronizing cloud projects
+*   Visual indicators of ‘newer’ cloud project available on the server in QField
+*   Relationship’s children can now be created _prior to_ saving their parent feature
+*   Insure positioning precise view (i.e. stake-out) works on compass-less devices---
+
+---
+
+### ✨ Improvements continued
+*   User interface polishing, including a brand new main menu layout
+*   Support for gpsd-served NMEA streams over TCP/UDP
+*   Updated several underlying libraries, including QGIS (v3.36) and Qt (v6.6.2)
+
+---
+
+### 🤖 Android improvements
+
+*   Massive re-work of native camera, gallery, and file opening activities unlocking proper OS activity overlay
+
+---
+
+![](https://talks.opengis.ch/qfield/images/qf32.jpg')
+
+---
+
+# More
+* qfield.org
+* fosstodon.org/@qfield
+* opengis.ch/blog
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qfield3","css":"slides/stylesheets/base-theme.css,slides/stylesheets/base-white-theme.css,slides/stylesheets/opengisch-bright.css,slides/stylesheets/opengisch-dark.css,slides/stylesheets/pitch-theme.css,slides/stylesheets/softteaching-theme.css,slides/stylesheets/teaching-theme.css"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) { mermaid.init(mermaidOptions, '.stack.present>.present pre code.mermaid'); };
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>
