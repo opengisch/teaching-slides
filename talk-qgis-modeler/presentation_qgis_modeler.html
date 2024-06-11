@@ -27,7 +27,7 @@
           <textarea data-template>
             
 
-## Processing in QGIS: Advanced Geospatial Analysis Techniques and Tools
+### Processing in QGIS: Advanced Geospatial Analysis Techniques and Tools
 
 ---
 
@@ -35,11 +35,11 @@
 
 - Introduction to the modeler
   - Practical application
-  - Creating a raster data processing model
+- Creating a raster data processing model
 - Creating a vector data processing model
 - Batch processing
 - Various ways to share the model
-- Conclusion
+- Conclusion & Outlook
 
 ---
 
@@ -89,7 +89,7 @@ Mission: Find the best locations for Maya the beekeeper's hives!
 
 Help Maya, a beekeeper in Lavertezzo, find the perfect spots for her new hives.
 
-![Maya](assets/maya_apicultrice.png)
+<img src="assets/maya_apicultrice.png" style="height: 8em" alt="Maya" />
 
 --v--
 
@@ -110,8 +110,10 @@ Area exposure.
 
 --v--
 
-- Data : area, swissALTI3D
-- Plugin : Swiss Geo Downloader
+- Data
+  - Layer " `area` "
+  - swissALTI3D
+    - via Plugin : Swiss Geo Downloader
 
 --v--
 
@@ -121,27 +123,59 @@ Download the "swissALTI3D" data for the area
 
 --v--
 
-##### Etapes du modèle
+##### Modeling steps
+
+###### Create the model
+
+<br />
 
 1. Name the model `exposure_raster`
 2. Save the model in the project ![Save the model in the project](assets/enregistrer_dans_projet.png)
-3. Add the GDAL algorithm "Merge"
-   - Input layers: select the four tiles of swissALTI3D
-4. Add the "aspect" algorithm
-   - Under "Aspect" name it `exposure` (this will be the output layer name)
-!["aspect" algorithm](assets/algorithme_exposition_en.png)
 
 --v--
 
-1. Add the "Apply Style" algorithm
+##### Modeling steps
+
+###### Merge the swissALTI3D layers
+
+<br />
+
+3. Add the GDAL algorithm "Merge"
+   - Input layers: select the four tiles of swissALTI3D
+   - Click "Show advances parameters"
+     - Under "Additional Command line parameters", add:
+       - `-of GTiff`
+
+--v--
+
+##### Modeling steps
+
+###### Aspect ("Perspektive")
+
+<br />
+
+4. Add the "aspect" algorithm
+   - Under "Aspect" name it `exposure` (this will be the output layer name)
+
+<img alt="aspect algorithm" src="assets/algorithme_exposition_en.png" style="height: 10em;">
+
+--v--
+
+##### Modeling steps
+
+###### Style the result
+
+5. Add the "Apply Style" algorithm
    - Layer: change `Model Input` to `Algorithm Output`, set the value to "Exposure"  !["aspect" algorithm](assets/entree_modele_en.png)
    - Add an "File/Folder" input 
    - In the "Apply Style" algorithm, change "Style File" to `Model Input`, set the value to `style exposure`
-2. Save the model in the project
+6. Save the model in the project
+
+--v--
 
 **Result**
 
-| Modeleur | Paramètres d'exécution |
+| Model | Parameters |
 |----------|------------------------|
 | ![model result](assets/raster_resultat_modeleur_en.png) | ![Model Parameters](assets/raster_resultat_parametres_modeleur_en.png) |
 
@@ -149,18 +183,44 @@ Download the "swissALTI3D" data for the area
 
 #### Vector Data Analysis
 
-Overlay of two buffer zones: 50 meters from the forest and 100 meters from public transport.
+<br />
+
+Overlay of two buffer zones:
+
+- <b>50 meters from the forest</b>
+- <b>100 meters from public transport.</b>
 
 --v--
 
-- Data : area, land cover, PT
+##### Model Input
+
+<br />
+
+- Data
+  - Layer " `area` ",
+  - Layer " `land cover` "
+  - Layer " `PT` "
 
 --v--
 
 ##### Model Steps
 
+###### Create the model
+
+<br />
+
 1. Name the model `vector_process`
 2. Save the model in the project ![Save the model in the project](assets/enregistrer_dans_projet.png)
+
+--v--
+
+##### Model Steps
+
+###### Model input
+
+<br />
+
+
 3. Add a "Vector Layer" input
    - Description `Land Cover`
    - Geometry type `Polygon`
@@ -170,45 +230,57 @@ Overlay of two buffer zones: 50 meters from the forest and 100 meters from publi
 5. Add a "Vector Layer" input
    - Description `PT`
    - Geometry type `Point`
-6. Add the "Entity Filter" algorithm
+
+--v--
+
+##### Model Steps
+
+###### Model input
+
+<br />
+
+6. Add the "Entity Filter" algorithm <img alt="Algorithme filtre" src="assets/algorithme_filtre_en.png" style="float: right;height: 10em;padding-left:2em;" />
    - Source layer: use `Model Input`, set the value to `Land Cover`
-   - Output and filters: add an output with "Output Name" = `forest` and "Filter Expression" `"objektart" = 'Wald'` ![Algorithme filtre](assets/algorithme_filtre_en.png)
+   - Output and filters: add an output with "Output Name" = `forest` and "Filter Expression" `"objektart" = 'Wald'`
 
 --v--
 
 7. Add the "Clip" algorithm
    - Source layer: use `Algorithm Output`, set the value to `forest`
    - Overlay layer: use `Model Input`, set the value to `area`
+
+--v--
+
 8. Add the "Buffer" algorithm
    - Description: set the value to `Forest Buffer`
    - Source layer: use `Algorithm Output`, set the value to `Clipped`
-   - Add a "Number" input, description `forest_buffer_size` ![Entrée nombre](assets/entree_nombre_en.png)
+   - Add a "Number" input, description `forest_buffer_size` <img alt="Entrée nombre" src="assets/entree_nombre_en.png" style="float: right;height: 10em">
    - Distance: use `Model Input`, set the value to `forest_buffer_size`
 
 --v--
 
-1. Add the "Buffer" algorithm
+9. Add the "Buffer" algorithm
    - Description: set the value to `PT Buffer`
    - Source layer: use `Model Input`, set the value to `PT`
    - Add a "Number" input, description `PT_buffer_size` 
    - Distance: use `Model Input`, set the value to `pt_buffer_size`
-2. Add the "Intersection" algorithm
+10. Add the "Intersection" algorithm
     - Source layer: use `Algorithm Output`, set the value to `Forest Buffer`
     - Overlay layer: use `Algorithm Output`, set the value to `PT Buffer`
     - ntersection: set `best_location`
-3. Save
+11. Save
 
 --v--
 
 **Result**
 
-| Modeleur | Paramètres d'exécution |
+| Model | Parameters |
 |----------|------------------------|
 | ![model result](assets/vecteur_resultat_modeleur_en.png) | ![Model Parameters](assets/vecteur_resultat_parametres_modeleur_en.png) |
 
 --v--
 
-![graph result](assets/resultat_graphique.png)
+<img alt="graph result" src="assets/resultat_graphique.png" style="height: 50vh" >
 
 ---
 
@@ -223,9 +295,8 @@ Now that we have two tools, they can be executed on batch data.
 
 #### How to Execute a Batch Process
 
-1. Execute the tool
+1. Execute the tool <img alt="Batch processing" src="assets/traitement_lot_en.png" style="float: right; height: 10em; padding-left: 4em" >
 2. Click "Execute as batch process..." 
-![Batch processing](assets/traitement_lot_en.png)
 
 --v--
 
@@ -245,20 +316,19 @@ Now that we have two tools, they can be executed on batch data.
 
 ### Various Ways to Share the Model
 
-- Save in the project
+- Save in the project <img alt="save in the project" src="assets/enregistrer_projet_situation_en.png" style="float:right;height: 8em;">
   - It appears in the toolbox
-![save in the project](assets/enregistrer_projet_situation_en.png)
 
-   - Right-click to access several options  ![Right-click options](assets/modele_projet_clic_droit_en.png)
+   - Right-click to access several options  <img alt="Right-click options" src="assets/modele_projet_clic_droit_en.png" style="float: left; height: 4em">
 
 --v--
 
-- Save the model as `model3` format ![Enregistrer sous format model3](assets/enregistrer_format.png)
+- Save the model as `model3` format <br />![Enregistrer sous format model3](assets/enregistrer_format.png)
 
 --v--
 
 - Export as a Python script  ![Export Python](assets/export_python.png)
-  - Once exported, the script can no longer be used in the Modeler.
+  - Once exported, the script can no longer be used in the Modeler...
 - Export as an image ![Export image](assets/export_image.png)
 - Export as a PDF. (This is not working well) ![Export PDF](assets/export_pdf.png)
 - Export as an SVG ![Export SVG](assets/export_svg.png) 
@@ -269,17 +339,80 @@ Now that we have two tools, they can be executed on batch data.
 
 QGIS Modeler is a powerful tool for automating and optimizing geospatial analyses.
 
-It offers many advantages, including:
+It offers many advantages...
 
-- **Task automation**
+--v--
+
+#### Task automation
+
 Simplify complex workflows by grouping multiple operations into a single model. Save time and reduce errors by automating repetitive tasks.
-- **Increased efficiency and reproducibility**
+
+
+--v--
+
+#### Increased efficiency and reproducibility
+
+
 Optimize your analyses and ensure consistent results using standardized models.
-- **Flexibility and customization**
+
+--v--
+
+#### Flexibility and customization
+
 Adapt models to your specific needs using expressions, variables, and parameters.
-- **Sharing and collaboration**
+
+--v--
+
+#### Sharing and collaboration
+
 Facilitate sharing your models with others and encourage collaboration within your team.
 
+---
+
+### Outlook
+
+- Example of a large model
+- Add more algorithms via Plugins
+- Python scripts as algorithm
+- Ideas and missing features
+
+--v--
+
+#### Example of a large model
+
+<a href="assets/model3_Trassenkosten-Ermittlung.pdf" target="_blank">
+   <img alt="Example of a large model" src="assets/screenshot_large_model.png" style="height: 10em;float:left">
+</a>
+
+<img alt="Result of a large model" src="assets/result_large_model.png" style="height: 10em;float:right">
+
+--v--
+
+#### Add more algorithms via Plugins
+
+<a href="https://plugins.qgis.org/plugins/tags/processing/" target="_blank">https://plugins.qgis.org/plugins/tags/processing/</a>
+
+--v--
+
+#### Python scripts as algorithm
+
+--v--
+
+#### Discussion: <br /> Ideas and missing features
+
+
+---
+
+### End 😊
+
+<br>
+
+##### Thanks for your participation 🙏
+
+
+<br>
+
+##### Time for questions and discussion ❓
           </textarea>
         </section>
       </div>
