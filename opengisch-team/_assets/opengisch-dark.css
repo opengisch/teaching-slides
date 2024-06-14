@@ -1,0 +1,9 @@
+/* opengisch-dark.css */
+/* @theme opengisch-dark */
+
+@import 'base-theme.css';
+
+section {
+  /* Override default background */
+  background: var(--opengisch-black);
+}

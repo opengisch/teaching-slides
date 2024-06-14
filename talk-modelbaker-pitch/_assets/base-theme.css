@@ -1,0 +1,58 @@
+/* base-theme.css */
+/* @theme base-theme */
+
+@import "base-white-theme.css";
+
+:root {
+    --opengisch-green: hsl(88, 67%, 48%);
+    --opengisch-blue: #2880cc;
+    --opengisch-dark: #313131;
+    --opengisch-light: #c2c2c2;
+
+    --r-main-font: "futura-pt", Helvetica, Arial, sans-serif;
+    --r-heading-font: "futura-pt", Helvetica, Arial, sans-serif;
+}
+
+/* assign the r-heading size to h5 because it's not done by current reveal.js theme */
+h5 {
+    font-size: var(--r-heading5-size);
+}
+
+/* color classes used for texts */
+
+.blue {
+    color: var(--opengisch-blue) !important;
+}
+
+.green {
+    color: var(--opengisch-green) !important;
+}
+
+.light {
+    color: var(--opengisch-light) !important;
+}
+
+.dark {
+    color: var(--opengisch-dark) !important;
+}
+
+/* opengisch logo */
+
+body:after {
+    content: url(./logo_white.png);
+    position: fixed;
+    bottom: -6em;
+    right: -6em;
+    z-index: -1;
+}
+
+/* classes used for multiple columns */
+
+.container {
+    display: flex;
+}
+
+
+.col {
+    flex: 1;
+}
