@@ -1,0 +1,72 @@
+
+h1 {
+    color: #81cd28;
+    font-weight:700;
+    font-size: 24px;
+}
+
+h2 {
+    page-break-inside: avoid;
+    color: #81cd28;
+    font-weight:700;
+    font-size: 20px;
+}
+
+h3 {
+    page-break-inside: avoid;
+    color: #81cd28;
+    font-weight:700;
+    font-size: 16px;
+}
+
+.optional {
+  color: #072c82;
+}
+
+h4 {
+    page-break-inside: avoid;
+    color: #81cd28;
+    font-weight:700;
+    font-size: 14px;
+}
+
+/* Headings should not be the last paragraph on a page: */
+h1, h2, h3, h4, h5, h6
+  {
+    page-break-after: avoid;
+  }
+/* Consecutive headings with deepening level should not be split across pages: */
+h1+h2, h2+h3, h3+h4, h4+h5, h5+h6
+  {
+    page-break-before: avoid;
+  }
+
+table {
+    page-break-inside: avoid;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd; /* Add this line for left border */
+    border-right: 1px solid #ddd; /* Add this line for left border */
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  td:last-child {
+    border-right: 1px solid #ddd; /* Remove the right border from the last column */
+  }
+
+/* Resize images */
+img {
+    max-width: 100%; /* Ensure images don't exceed their container width */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+li {
+    page-break-inside: avoid;
+  }
+

@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>Team</title>
+    <title>Qfieldcloud Presentation</title>
     <link rel="shortcut icon" href="./favicon.ico" />
     <link rel="stylesheet" href="./dist/reset.css" />
     <link rel="stylesheet" href="./dist/reveal.css" />
-    <link rel="stylesheet" href="./_assets/stylesheets/about-theme.css" id="theme" />
+    <link rel="stylesheet" href="./_assets/stylesheets/qfield-theme.css" id="theme" />
     <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
 
   </head>
@@ -19,15 +19,113 @@
           <textarea data-template>
             
 
-<!-- .slide: data-background="assets/ivan.jpg" -->
-## Ivan Ivanov
-
+## QFieldCloud
 
 ---
 
-<!-- .slide: data-background="assets/ivan-2.jpg" -->
+#### Abonnements
 
-ivan@opengis.ch
+--v--
+
+![abonnements](assets/abonnements2.png)
+
+--v--
+
+Pour des projets privés en collaboration, une *Organisation* est nécessaire.
+
+---
+
+#### Plan *Organisation* QFC
+
+--v--
+
+Les utilisateurs s’inscrivent eux avec un plan *Community* et l’utilisateur qui a créé l’*Organisation* (l'administrateur) les ajoute comme membres.
+
+--v--
+
+![membre](assets/membres.png)
+
+Admin ou membre
+
+--v--
+
+Ensuite il est possible de gérer des équipes (teams)
+
+![teams](assets/teams.png)
+
+Par exemple terrain, lecture seul,...
+
+--v--
+
+Ajouter les teams ou membres dans les collaborateurs du projet.
+
+Attribuer un rôle sur le projet.
+
+![rôle projet](assets/role_projet.png)
+
+---
+
+#### Projets
+
+--v--
+
+Synchronisation du projet depuis QGIS avec QFieldSync
+
+ou création directement sur QFC
+
+![créer projet QFC](assets/creer_projet_qfc.png)
+
+--v--
+
+Transférer la propriété du projet à l’organisation. 
+
+![transfert propriété](assets/transfert_propriete.png)
+
+---
+
+#### POSTGIS
+
+--v--
+
+Utilisation du pg_service.conf sur QFC et les devices
+
+![postgis secrets](assets/postgis_secrets.png)
+
+--v--
+
+Configurer un projet QGIS avec des données POSTGIS
+
+Utilisation de QFieldSync pour télécharger sur le cloud
+
+![qfield sync](assets/qfield_sync2.png)
+
+---
+
+#### Conditions d’utilisation
+
+--v--
+
+Les conditions d’utilisation se trouvent sous “Terms of service” en bas de page de QFC https://qfield.cloud/tos.html
+
+---
+
+#### Hébergement
+
+--v--
+
+QFC est hébergé en Suisse
+
+![suisse](assets/suisse.png)
+
+---
+
+#### Solution sur serveur privé
+
+--v--
+
+Déjà possible, le projet est open source
+
+Une offre pour qu' OPENGIS.ch s’occupe de l’installation va bientôt arriver
           </textarea>
         </section>
       </div>
@@ -79,7 +177,7 @@ ivan@opengis.ch
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","static-dirs":"slides/assets","staticDirs":"slides/assets","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Team"}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","static-dirs":"slides/assets","staticDirs":"slides/assets","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qfieldcloud Presentation"}, queryOptions);
     </script>
 
 
