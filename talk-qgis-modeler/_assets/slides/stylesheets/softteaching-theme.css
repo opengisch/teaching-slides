@@ -1,0 +1,49 @@
+/* teaching-theme.css */
+
+@import 'base-theme.css';
+
+:root {
+  --r-background-color: var(--opengisch-dark);
+  --opengisch-softgreen: #b2e07e;
+}
+
+/* Slide-specific vertical centering override */
+.reveal .slides section[data-vertical-align-top] {
+  top: 0 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--opengisch-softgreen) !important;
+  text-align: left !important;
+}
+
+h4,h5,h6{
+  text-transform: none !important;
+}
+
+code {    
+    color: rgba(255, 255, 255, 0.87) !important;
+    background-color: rgba(0, 0, 0) !important;
+    align-self: left !important;
+}
+pre {
+  margin: 0 !important;
+  font-size: 1em !important;
+}
+
+p,
+ul,
+tr,
+td,
+div {
+  color: var(--opengisch-light) !important;
+  text-align: left !important;
+}
+li {
+  margin-top: 0.5em !important;
+}
