@@ -1,9 +1,0 @@
-/* opengisch-bright.css */
-/* @theme opengisch-bright*/
-
-@import 'base-theme.css';
-
-section {
-  /* Override default background */
-  background: var(--opengisch-green);
-}
