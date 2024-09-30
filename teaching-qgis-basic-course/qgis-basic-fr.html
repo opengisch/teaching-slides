@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Qgis Basic Course</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./_assets/theme/softteaching-theme.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
+
+# QGIS cours de base
+
+--v--
+
+## Qui suis-je ?
+
+--v--
+
+### Lucie Nicolier
+
+#### Bachelor en géomatique et gestion du territoire @HEIG-VD
+#### Experte SIG
+
+--v--
+
+## Qui sommes-nous ?
+
+--v--
+
+![](./assets/social_distancing_love_os.png)
+
+#### Open source Geoninjas
+##### Made in Switzerland
+
+--v--
+
+## Ce que nous faisons
+
+#### Du développement
+#### Du support
+#### De l'enseignement
+
+--v--
+
+## Comment ?
+#### - flexible
+#### - sur mesure
+#### - Open Source
+#### - haut standards de qualité suisse
+
+--v--
+
+## Qui êtes-vous ?
+
+---
+
+## Objectifs du cours
+À la fin de ce cours, vous connaîtrez les principales fonctionnalités de QGIS Desktop, vous serez en mesure d'importer et de modifier les données, de créer une carte avec une mise en page d'impression professionnelle et de numériser des éléments avec des attributs et une géométrie.
+
+---
+
+## Programme
+
+09.00-10.30 QGIS 
+
+Pause
+
+10.40-12.00 QGIS
+
+Repas de midi
+
+13.00-14.40 QGIS
+
+Pause
+
+15.00-17.00 QGIS
+
+---
+
+## Projet QGIS
+
+![QGIS](./assets/qgis-logo.svg)
+
+--v--
+
+## A propos de QGIS
+
+- SIG desktop open source
+- Tourne sur Linux, Unix, Mac OSX, Windows et Android
+- Supporte de nombreux formats vectoriel, raster et des bases de données et nombreuses fonctionnalités
+
+--v--
+
+## QGIS est un logiciel libre et open source
+
+- QGIS peut être utilisé sans restriction aussi souvent que souhaité
+- Le produit est remplacé par le projet
+- Toutes les modifications peuvent être faites, mais doivent être rendues accessibles si des projets/produits dérivés sont vendus
+
+--v--
+
+## La communauté
+
+### Projet mené par des bénévoles
+
+--v--
+
+### Contribuer
+
+ -  Développement code
+ -  Rapport sur les bugs
+ -  Correction des bugs
+ -  Contribution à la documentation
+ -  Soutien financier
+ -  Le bouche-à-oreille
+
+<https://qgis.org/de/site/getinvolved/index.html>
+
+--v--
+
+### Les fonctionnalités principales (1)
+
+-  Visualiser et symboliser les données
+-  Saisir et éditer des données
+-  Créer des cartes
+-  Importer/exporter des données
+-  Analyser des données
+
+--v--
+
+### Les fonctionnalités principales (2)
+
+-  Imprimer et publier des cartes sur internet
+-  Fonctionnalités QGIS avancées
+   -  Extensions principales
+   -  Extensions Python externes
+-  Console Python
+
+--v--
+
+### Support commercial
+
+#### OPENGIS.ch est organisation reconnue par QGIS.
+
+Nous offrons du support, de la formation et du développement pour votre stack SIG open source.
+
+Nos développeurs principaux QGIS sont expérimentés en C++, Python, SQL, analyse de géodonnées, développement mobile  (Android, iOS, Windows) et bien plus.
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","static-dirs":"slides/assets","staticDirs":"slides/assets","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qgis Basic Course"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) {
+        mermaid.init(mermaidOptions, '.stack.present > .present pre code.mermaid');
+        mermaid.init(mermaidOptions, '.slides > .present:not(.stack) pre code.mermaid');
+      }
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>
