@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Qfield Plugins Workshop</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./_assets/stylesheets/softteaching-theme.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
+
+# QField Plugins workshop
+
+### FOSS4G 2024 - Belém, Brasil
+<img src="assets/qfield_logo.png" style="width:150px">
+
+---
+
+## Who we are
+
+--v--
+
+<!-- .slide: data-background="./assets/opengis.jpg"-->
+
+--v--
+
+## Who you are
+
+<img src="assets/foss4g_logo_white.png" style="width:365px">
+
+--v--
+
+## AGENDA
+
+1. Why plugins for QField?
+2. Types of QField plugins
+3. Intro to QML 🧑‍💻
+4. Developing QField plugins 🧑‍💻
+5. Plugin demo: OSRM routing
+6. Recreating the Weather Forecast plugin! 🧑‍💻
+7. Plugin showcase
+8. Resources
+
+-----------
+
+<small>🧑‍💻: Practice!</small>
+
+---
+
+## Why plugins for QField?
+
+---
+
+## TYPES OF QFIELD PLUGINS
+
+PROJECT PLUGINS | APPLICATION PLUGINS
+----------------|--------------------
+Shared alongside QField project | Shared via URL (ZIP file)
+Single plugin | Multiple plugins
+Installation not required | Required installation
+Lasts project session | Lasts QField session
+
+---
+
+## INTRO TO QML 🧑‍💻
+
+ + <span style="color:#b2e07e;font-weight:bold">Q</span>t <span style="color:#b2e07e;font-weight:bold">M</span>odeling <span style="color:#b2e07e;font-weight:bold">L</span>anguage, declarative, design-oriented
+
+--v--
+
+## INTRO TO QML 🧑‍💻
+
+ + <span style="color:#b2e07e;font-weight:bold">Q</span>t <span style="color:#b2e07e;font-weight:bold">M</span>odeling <span style="color:#b2e07e;font-weight:bold">L</span>anguage, declarative, design-oriented
+
+ + **Elements (aka types)**
+
+--v--
+
+### \.\./Elements (aka types)
+
+```Item, Rectangle, Text, TextInput, MouseArea, Dialog, ...```
+
+----
+
+``` qml
+Text {
+  ...
+}
+```
+
+--v--
+
+### \.\./Elements (aka types)
+
+```Item, Rectangle, Text, TextInput, MouseArea, Dialog, ...```
+
+----
+
+``` qml
+Rectangle {
+  ...
+  Text {
+    ...
+  }
+}
+```
+
+--v--
+
+### \.\./Elements (aka types)
+
+```Item, Rectangle, Text, TextInput, MouseArea, Dialog, ...```
+
+----
+
+``` qml
+Item {
+  ...
+  Text {
+    ...
+  }
+}
+```
+
+--v--
+
+## INTRO TO QML 🧑‍💻
+
+ + <span style="color:#b2e07e;font-weight:bold">Q</span>t <span style="color:#b2e07e;font-weight:bold">M</span>odeling <span style="color:#b2e07e;font-weight:bold">L</span>anguage, declarative, design-oriented
+
+ + Elements (aka types)
+
+ + **Attributes: Properties, Signals, Handlers and Methods**
+
+--v--
+
+### \.\./Attributes: Properties, Signals, Handlers and Methods
+
+<span style="font-size:0.85em;">
+
+``` qml
+Rectangle {
+  ...
+  MouseArea {
+    id: myArea
+
+    ...
+
+  }
+}
+```
+</span>
+
+--v--
+
+### \.\./Attributes: Properties, Signals, Handlers and Methods
+
+<span style="font-size:0.85em;">
+
+``` qml
+Rectangle {
+  ...
+  MouseArea {
+    id: myArea
+
+    color: "green"
+    anchors.fill: parent
+  }
+}
+```
+</span>
+
+--v--
+
+### \.\./Attributes: Properties, Signals, Handlers and Methods
+
+<span style="font-size:0.85em;">
+
+``` qml
+Rectangle {
+  ...
+  MouseArea {
+    id: myArea
+
+    color: "green"
+    anchors.fill: parent
+
+    onClicked: ...
+  }
+}
+```
+</span>
+
+--v--
+
+### \.\./Attributes: Properties, Signals, Handlers and Methods
+
+<span style="font-size:0.85em;">
+
+``` qml
+Rectangle {
+  ...
+  MouseArea {
+    id: myArea
+
+    color: "green"
+    anchors.fill: parent
+
+    onClicked: ...
+
+    function myCustomMethod() {
+      ...
+      return ...;
+    }
+  }
+}
+```
+</span>
+
+--v--
+
+### \.\./Attributes: Properties, Signals, Handlers and Methods
+
+<span style="font-size:0.85em;">
+
+``` qml
+Rectangle {
+  ...
+  MouseArea {
+    id: myArea
+
+    color: "green"
+    anchors.fill: parent  // Property binding!
+
+    onClicked: ...
+
+    function myCustomMethod() {
+      ...
+      return ...;
+    }
+  }
+}
+```
+</span>
+
+--v--
+
+## INTRO TO QML 🧑‍💻
+
+ + <span style="color:#b2e07e;font-weight:bold">Q</span>t <span style="color:#b2e07e;font-weight:bold">M</span>odeling <span style="color:#b2e07e;font-weight:bold">L</span>anguage, declarative, design-oriented
+
+ + Elements (aka types)
+
+ + Attributes: Properties, Signals, Handlers and Methods
+
+ + **QML Resources**
+
+--v--
+
+### \.\./QML Resources
+
+<br/>
+
+Introduction to Qt/QML, by KDAB: [YouTube Playlist](https://www.youtube.com/watch?v=JxyTkXLbcV4&list=PL6CJYn40gN6hdNC1IGQZfVI707dh9DPRc&index=2)
+
+QML Reference: https://doc.qt.io/qt-5/qmlreference.html
+
+QML Tutorial: https://doc.qt.io/qt-5/qml-tutorial.html
+
+--v--
+
+## INTRO TO QML 🧑‍💻
+
+ + <span style="color:#b2e07e;font-weight:bold">Q</span>t <span style="color:#b2e07e;font-weight:bold">M</span>odeling <span style="color:#b2e07e;font-weight:bold">L</span>anguage, declarative, design-oriented
+
+ + Elements (aka types)
+
+ + Attributes: Properties, Signals, Handlers and Methods
+
+ + Resources
+
+ + **Hello world (QML)!** 👋
+
+--v--
+
+### \.\./Hello world (QML) 👋
+
+``` qml
+import QtQuick 2.0
+
+Text {
+  text: "Hello world!"
+}
+```
+
+--v--
+
+## INTRO TO QML 🧑‍💻
+
+ + <span style="color:#b2e07e;font-weight:bold">Q</span>t <span style="color:#b2e07e;font-weight:bold">M</span>odeling <span style="color:#b2e07e;font-weight:bold">L</span>anguage, declarative, design-oriented
+
+ + Elements (aka types)
+
+ + Attributes: Properties, Signals, Handlers and Methods
+
+ + Resources
+
+ + Hello world (QML)! 👋
+
+ + **Exercise online!** 🧑‍💻
+
+--v--
+
+## \.\./Exercise online! 🧑‍💻
+
+<br/>
+Go to:
+
+https://qmlweb.github.io
+
+---
+
+## Developing QField plugins 🧑‍💻
+
++ **QField GUI**
+
+--v--
+
+## \.\./QField GUI
+
+<span style="font-size:0.8em;"><span style="color:orange">Dashboard</span> | Main menu | Search bar | Plugins toolbar | Positioning | Canvas actions</span>
+![alt text](assets/gui_1.png)
+
+--v--
+
+## \.\./QField GUI
+
+<span style="font-size:0.8em;">Dashboard | <span style="color:orange">Main menu</span> | Search bar | Plugins toolbar | Positioning | Canvas actions</span>
+![alt text](assets/gui_2.png)
+
+--v--
+
+## \.\./QField GUI
+
+<span style="font-size:0.8em;">Dashboard | Main menu | <span style="color:orange">Search bar</span> | Plugins toolbar | Positioning | Canvas actions</span>
+![alt text](assets/gui_3.png)
+
+--v--
+
+## \.\./QField GUI
+
+<span style="font-size:0.8em;">Dashboard | Main menu | Search bar | <span style="color:orange">Plugins toolbar</span> | Positioning | Canvas actions</span>
+![alt text](assets/gui_4.png)
+
+--v--
+
+## \.\./QField GUI
+
+<span style="font-size:0.8em;">Dashboard | Main menu | Search bar | Plugins toolbar | <span style="color:orange">Positioning</span> | Canvas actions</span>
+![alt text](assets/gui_5.png)
+
+--v--
+
+## \.\./QField GUI
+
+<span style="font-size:0.8em;">Dashboard | Main menu | Search bar | Plugins toolbar | Positioning | <span style="color:orange">Canvas actions</span></span>
+![alt text](assets/gui_6.png)
+
+--v--
+
+## Developing QField plugins 🧑‍💻
+
++ QField GUI
++ **QField API** 📗
+
+--v--
+
+## \.\./QField API 📗
+
+#### <span style="font-size:0.8em;"><span style="color:orange">Root objects</span> | iface | Theme | QField GUI types | Utils</span>
+
+--------
+
+```iface```
+
+```qgisProject```
+
+```settings```
+
+```clipboardManager```
+
+```...```
+
+--------
+
+<small>_See [qgismobileapp.cpp](https://github.com/opengisch/QField/blob/master/src/core/qgismobileapp.cpp#L574-L591) for details._</small>
+
+--v--
+
+## \.\./QField API 📗
+
+#### <span style="font-size:0.8em;">Root objects | <span style="color:orange">iface</span> | Theme | QField GUI types | Utils</span>
+
+--------
+
+```iface.mainWindow()```
+
+```iface.mapCanvas()```
+
+```iface.findItemByObjectName("...")```
+
+```iface.logMessage("...")```
+
+--------
+
+```iface.addItemToPluginsToolbar()```
+
+```iface.addItemToMainMenuActionsToolbar()```
+
+```iface.addItemToCanvasActionsToolbar()```
+
+--------
+
+<small>_See [appinterface.h](https://github.com/opengisch/QField/blob/master/src/core/appinterface.h) for details._</small>
+
+--v--
+
+## \.\./QField API 📗
+
+#### <span style="font-size:0.8em;">Root objects | iface | <span style="color:orange">Theme</span> | QField GUI types | Utils</span>
+
+--------
+``` qml
+Theme.mainColor  // #80cc28
+
+Theme.mainTextColor
+
+Theme.mainBackgroundColor
+
+Theme.darkGray
+
+Theme.defaultFont
+
+Theme.getThemeVectorIcon("...")
+```
+--------
+
+<small>_See [Theme.qml](https://github.com/opengisch/QField/blob/master/src/qml/imports/Theme/Theme.qml) for details._</small>
+
+--v--
+
+## \.\./QField API 📗 
+
+#### <span style="font-size:0.8em;">Root objects | iface | Theme | <span style="color:orange">QField GUI types</span> | Utils</span>
+
+--------
+```QfButton```
+
+```QfToolButton```
+
+```QfTextField```
+
+```QfSwitch```
+
+```QfComboBox```
+
+```...```
+
+--------
+
+<small>_See [src/qml/imports/Theme/*](https://github.com/opengisch/QField/blob/master/src/qml/imports/Theme/Theme.qml) for details._</small>
+
+--v--
+
+## \.\./QField API 📗 
+
+#### <span style="font-size:0.8em;">Root objects | iface | Theme | QField GUI types | <span style="color:orange">Utils</span></span>
+
+--------
+```LayerUtils```
+
+```GeometryUtils```
+
+```FeatureUtils```
+
+```CoordinateReferenceSystemUtils```
+
+```SnappingUtils```
+
+```...```
+
+--------
+
+<small>_See [src/core/utils/*](https://github.com/opengisch/QField/tree/master/src/core/utils) for details._</small>
+
+--v--
+
+## Developing QField plugins 🧑‍💻
+
+  + QField GUI
+  + QField API
+  + **"Hello world"** 👋
+
+&nbsp; <!-- add some vertical space -->
+
+``` qml
+import QtQuick
+
+Item {
+  Component.onCompleted: {
+    iface.mainWindow().displayToast('Hello world!')
+  }
+}
+```
+
+--v--
+
+## Developing QField plugins 🧑‍💻
+
++ QField GUI
++ QField API
++ "Hello world"
++ **Debugging** 🐞
+
+  ```iface.logMessage("")```
+
+  ```mainWindow.displayToast("")```
+
+  ```console.log("")``` ?
+
+--v--
+
+## Developing QField plugins 🧑‍💻
+
++ QField GUI
++ QField API
++ "Hello world"
++ Debugging
++ **QField template plugin** 🧑‍💻
+  
+  https://github.com/opengisch/qfield-template-plugin 
+
+---
+
+## OSRM routing plugin demo
+
+<center>
+<img src="assets/osrm_routing_plugin.gif" style="height:700px;">
+</center>
+
+---
+
+## Weather Forecast plugin 🧑‍💻
+ 
+Let's recreate this plugin!
+
+What we need:
+
+ + Button to fetch a weather forecast and show an info dialog
+ + Our location
+ + API call:
+   + _XmlHttpRequest_ to do an API call and fetch the forecast
+   + Parse the request's response
+   + Set description (and temperature) QML properties
+
+---
+
+## Plugin showcase
+
+Snap!
+
+![](assets/showcase_snap.gif)
+
+--v--
+
+## Plugin showcase
+
+Nominatim locator plugin
+
+https://github.com/opengisch/qfield-nominatim-locator
+
+--v--
+
+## Plugin showcase
+
+LiveField plugin
+
+<video controls="controls">
+<source src="assets/showcase_livefield.mp4" type="video/mp4">
+</video>
+
+
+
+---
+
+## Resources
+
+QML Reference: https://doc.qt.io/qt-5/qmlreference.html
+
+Introduction to Qt/QML, by KDAB ([YouTube Playlist](https://www.youtube.com/watch?v=JxyTkXLbcV4&list=PL6CJYn40gN6hdNC1IGQZfVI707dh9DPRc&index=2))
+
+QML online editor: https://qmlweb.github.io
+
+QML advanced online editor: https://patrickelectric.work/qmlonline/
+
+QML Tutorial: https://doc.qt.io/qt-5/qml-tutorial.html
+
+QField plugins: https://github.com/topics/qfield-plugin
+
+Plugin icons: https://fonts.google.com/icons
+
+---
+
+![os_love](assets/love-os.png)
+
+Thanks, and happy coding!
+
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","static-dirs":"slides/assets","staticDirs":"slides/assets","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qfield Plugins Workshop"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) {
+        mermaid.init(mermaidOptions, '.stack.present > .present pre code.mermaid');
+        mermaid.init(mermaidOptions, '.slides > .present:not(.stack) pre code.mermaid');
+      }
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>
