@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Qfield Presentation</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./_assets/stylesheets/qfield-theme.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
+
+<!-- .slide: data-background="./assets/rapidmapper/1.jpg" -->
+## 1'300'000 reasons to use QField
+
+---
+
+## Tonga MAAF
+<!-- .slide: data-background="https://talks.opengis.ch/qfield/images/hunga.jpg" -->
+- Picture taking 
+- QFC API / SDK allowed for custom application integration
+- QFC API documentation allowed for easy writing of a R module to communicate with QFC server / project data
+
+---
+
+<!-- .slide: data-background="./assets/stories/tonga1.jpg " -->
+
+---
+
+<!-- .slide: data-background="./assets/stories/tonga2.jpg " -->
+
+---
+
+## Sevenson
+- Sensors framework
+- Thanks to QGIS’ powerful data-defined symbology, live visual analysis being rendered on the map canvas
+
+---
+
+## Sevenson
+<video autoplay mutes controls src="https://talks.opengis.ch/qfield/video/presentationvideos/sensors.mp4"></video>
+
+---
+
+## Kulturretter, DAI
+<!-- .slide: data-background="https://qfield.org/images/customer/dainst_img.jpg " -->
+
+https://www.kulturgutretter.org/en/data-acquisition-and-data-management-for-the-emergency-rescue-of-cultural-heritage/
+
+---
+
+## Kulturretter, DAI
+- workflow to collect and manage data in a seamless manner for the emergency rescue of cultural heritage.
+- the German Indiana Jones, they were behind quite a few functionality additions for our camera that includes geotagging (inc. compass), and details stamping (i.e. bottom left "date / lat lon / etc").
+
+---
+
+## NLS
+<!-- .slide: data-background="./assets/stories/nls.png " -->
+
+---
+
+<!-- .slide: data-background="./assets/stories/nls.jpg " -->
+## NLS 
+- processing
+- snapping (inc. new snapping to closing segment allowing for perfect 90 degree buildings while digitizing, in QField 3.5)
+
+---
+
+<!-- .slide: data-background="./assets/imu.png " -->
+## NLS
+- precise location
+
+---
+
+## Swiss QGIS user group
+Camera enhancements/Swetching
+
+<!-- .slide: data-background="./assets/stories/camera.jpg " -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/17.jpg " -->
+## Rapid mapping
+
+---
+
+## Rapid mapping
+
+- Plugin
+- API
+- webserver
+- full integration
+
+---
+
+<!-- .slide: data-background="https://www.gfz-potsdam.de/fileadmin/_processed_/f/1/csm_Overview-stations_30mar2022_a23411c1df.png " -->
+## Seismic project Eifel
+ Large-scale seismic experiment in Germany with more than 350 seismological stations
+ 
+ https://www.gfz-potsdam.de/en/section/physics-of-earthquakes-and-volcanoes/projects/eifel-a-large-n-volcano-seismology-experiment
+
+
+
+---
+
+<!-- .slide: data-background="./assets/stories/journal.jpg" -->
+## Journalism
+https://news.mongabay.com/
+
+---
+
+## Journalism
+- free to use, no hidden strings (important as journalism is greatly underpaid, especially for freelance journalists which are providing so much news reporting these days)
+- with dataset support, low entry level (i.e. they can open a georeferenced PDF)
+
+---
+
+<!-- .slide: data-background="./assets/stories/cestini.jpg" -->
+
+### Waste management in Milano
+- plugin
+- NFC / QR Code
+- powerful feature form configuration 
+
+---
+
+## Waste management in Milano
+<!-- .slide: data-background="./assets/stories/conf.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/stories/ginve.jpg" -->
+## Futura sistemi
+- API
+
+---
+
+<!-- .slide: data-background="./assets/stories/cr.jpg" -->
+## National Waste water management Costa Rica
+
+---
+
+<!-- .slide: data-background="./assets/stories/onprem.jpg" -->
+## National Waste ater management Costa Rica
+On prem QFC
+
+---
+
+## Many more
+- DB
+- BLS
+- SOB
+- UN
+- ...
+
+---
+
+# And you!?
+
+### qfield.org/partner
+
+#QFieldForXmas24
+
+marco@opengis.ch
+
+---
+
+
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","static-dirs":"slides/assets","staticDirs":"slides/assets","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qfield Presentation"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) {
+        mermaid.init(mermaidOptions, '.stack.present > .present pre code.mermaid');
+        mermaid.init(mermaidOptions, '.slides > .present:not(.stack) pre code.mermaid');
+      }
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>
