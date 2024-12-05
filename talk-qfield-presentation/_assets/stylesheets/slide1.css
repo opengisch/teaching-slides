@@ -1,0 +1,123 @@
+/* qfield-theme.css */
+/* @theme qfield-theme*/
+
+/*@import 'qfield-base-theme.css';*/
+
+:root {
+    --r-background-color: var(--opengisch-light);
+    /* --r-heading1-size: 200px;
+    --r-heading2-size: 150px;
+    --r-heading3-size: 100px;
+    --r-heading4-size: 70px;
+    --r-heading5-size: 60px;
+    --r-heading6-size: 25px; */
+    --r-block-margin: 20pt;
+}
+
+h1 {
+  color: var(--opengisch-dark) !important;
+  font-weight: bold !important;
+  font-size: 50pt !important;
+  line-height: 48pt !important;
+  text-align: left !important;
+  /* margin: -15pt !important; */
+}
+
+h2 {
+  color: var(--opengisch-green) !important;
+  /* -webkit-text-stroke: 2px var(--opengisch-green); */
+  font-weight: bold !important;
+  font-size: 50pt !important;
+  text-align: left !important;
+  margin: -15pt !important;
+}
+
+h3 {
+  color: var(--opengisch-green) !important;
+  -webkit-text-stroke: 3px var(--opengisch-green);
+  text-align: left !important;
+  font-size: 35pt !important;
+}
+
+
+h4 {
+  color: var(--opengisch-green) !important;
+  text-align: left !important;
+  font-size: 30pt !important;
+  font-variant: small-caps !important;
+}
+
+h5 {
+  color: var(--opengisch-dark) !important;
+  text-align: left !important;
+  font-weight: bold !important;
+  font-size: 25pt !important;
+  /* margin-left: -15pt !important; */
+  /*margin-top: 40pt !important;*/
+}
+
+h6 {
+  color: var(--opengisch-green) !important;
+  text-align: left !important;
+  font-size: 20pt !important;
+}
+
+p,
+ul,
+tr,
+td,
+div {
+  color: var(--opengisch-dark) !important;
+  text-align: left !important;
+}
+li {
+  /*margin-top: 0.5em !important;*/
+  font-weight: lighter !important;
+  font-size: 25pt !important;
+  margin-bottom: -45px !important;
+  /* font-variant: small-caps !important; */
+}
+
+.styled-video {
+  border-radius: 15px; /* Rounded corners */
+  /* border: 25px; */
+  /* border-color: var(--opengisch-green) !important; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+.styled-image {
+  border-radius: 15px;
+  border: 0.5px;
+  /*border-color: var(--opengisch-green) !important;*/
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/*.styled-gif {
+  border-radius: 15px;
+  border: 0.5px !important;
+  border-color: var(--opengisch-green) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}*/
+
+.styled-logo {
+  bottom: 10px;       /* Distance from the bottom */
+  margin-bottom: 0px;
+  margin-top: 150px;
+  width: 500px;        /* Adjust width as needed */
+  height: auto;       /* Maintain aspect ratio */
+}
+
+.reveal .slides::after {
+  content: ""; /* Required for the pseudo-element */
+  position: fixed; /* Keeps the logo fixed in one position across slides */
+  bottom: 0px; /* Adjust position from the bottom */
+  right: 0px; /* Adjust position from the right */
+  background-image: url('assets/logo-bg-cut-l'); /* Path to your logo */
+  background-size: 100px; /* Adjust size of the logo */
+  background-repeat: no-repeat;
+  opacity: 0.2; /* Adjust opacity */
+  width: 100px; /* Match the size of the logo */
+  height: 100px; /* Match the size of the logo */
+  pointer-events: none; /* Ensures the logo doesn’t interfere with interaction */
+  z-index: 1; /* Ensures the logo is below slide content */
+}
