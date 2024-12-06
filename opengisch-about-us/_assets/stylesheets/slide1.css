@@ -3,6 +3,8 @@
 
 /*@import 'qfield-base-theme.css';*/
 
+@import 'qfield-theme.css';
+
 :root {
     --r-background-color: var(--opengisch-light);
     /* --r-heading1-size: 200px;
