@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Qfield Presentation</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./_assets/stylesheets/qfield-theme.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
+
+<!-- .slide: data-background="./assets/rapidmapper/1.jpg" -->
+### QField to the rescue
+Natural catastrophe rapid mapping in 2024
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/1a.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/2.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/2a.jpg" -->
+
+---
+
+<iframe style="border: 0;width: 100%;height: 500px;max-width: 100%;max-height: 100%;" src="https://www.youtube.com/embed/Yutqp7LdGIQ?si=Gi1ThfQ-vFBLU_q6" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/3.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/3a.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/4.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/rapidmapping.jpg" -->
+
+rapidmapping.ch quickly created nadir imagery
+
+---
+
+![whatsapp](assets/rapidmapper/whatsapp.png)<br/>
+What about ground truth?
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/5.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/6.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/7.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/8.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/9.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/10.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/11.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/12.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/14.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/15.jpg" -->
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/17.jpg" -->
+
+---
+
+<video controls autoplay playsinline muted width="100%">
+    <source src="https://videos.files.wordpress.com/jsrjp0NU/rapidmapping.mp4" type="video/mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
+
+---
+
+<!-- .slide: data-background="./assets/rapidmapper/18.jpg" -->
+
+
+---
+
+## Learnings
+- Complete architecture setup in 2 days (including coding a proxy server and developing the QGIS project), in future couple of hours.
+- Allow subscribing to a project directly in QFieldCloud
+- Streamlining subscription and onboarding are crucial
+- Use setting to avoid downloading of all images when a reporter joins
+- Possibly allow reaching images from webgis without a proxy server
+
+---
+
+
+![os_love](assets/love-os.png)
+
+
+## Thanks! Questions?
+
+
+qfield.org | qfield.cloud | opengis.ch
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","static-dirs":"slides/assets","staticDirs":"slides/assets","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qfield Presentation"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) {
+        mermaid.init(mermaidOptions, '.stack.present > .present pre code.mermaid');
+        mermaid.init(mermaidOptions, '.slides > .present:not(.stack) pre code.mermaid');
+      }
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>
