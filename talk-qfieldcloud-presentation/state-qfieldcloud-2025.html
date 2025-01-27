@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Qfieldcloud Presentation</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./_assets/stylesheets/slide1.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="--v--">
+          <textarea data-template>
+            
+
+<style>
+.reveal .slides::after {
+    content: "";
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-image: url('assets/logo-bg-cut-l.png');
+    background-size: 100px;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.reveal h1 {
+  text-align: center !important;
+  font-size: 75px !important;
+  width: 100%;
+  margin-top: -100px;
+  -webkit-text-stroke: 3px var(--opengisch-dark) !important;
+}
+
+.reveal h2 {
+  color: var(--opengisch-dark) !important;
+  -webkit-text-stroke: 3px var(--opengisch-dark) !important;
+}
+
+.reveal h2+h2 {
+  color: var(--opengisch-blue) !important;
+  -webkit-text-stroke: 3px var(--opengisch-blue) !important;
+}
+
+</style>
+
+# STATE OF
+
+![](./assets/logo_sidetext.svg)
+
+---
+
+## What is
+## QFieldCloud?
+
+<br>
+<br>
+<br>
+
+## Your tool for
+## seamless fieldwork!
+
+---
+
+## [app.qfield.cloud](https://app.qfield.cloud) <br> the OPENGIS.ch hosted solution
+
+QFieldCloud is hosted in Switzerland!
+
+<img src="assets/suisse.png" height="300px" style="display: block; margin: 0 auto;">
+
+---
+
+## On-premises
+## QFieldCloud
+
+QFieldCloud is hosted in your organization!
+
+<p style="font-size: 200px; text-align: center !important;">
+🌎🌍🌏
+</p>
+
+---
+
+## 2024
+## in review
+
+---
+
+## 8000
+## unique active monthly users
+
+---
+
+<!-- ## 14200 monthly jobs -->
+## Every 3 minutes
+## a new job is started
+
+<!-- ---
+
+## 30 days
+## of processing per month -->
+
+---
+
+## Several
+## on-premises installations
+
+---
+
+## Notable
+## new 2024 features
+
+- Better, faster, stronger.
+- Teams management via QFieldCloud API.
+- Finer file permissions for sensitive files.
+- [QFieldCloud SDK docs](https://opengisch.github.io/qfieldcloud-sdk-python/) - docs and examples.
+
+---
+
+## 2025 will be
+## an exciting year!
+
+---
+
+## Single sign-on (SSO) support
+
+Support to login via Google landing soon.
+
+---
+
+## File storage improvements
+
+Great performance improvements for large projects.
+
+---
+
+## Shared files between projects
+
+Upload your basemaps once, synchronize it with all projects in your organization.
+
+---
+
+## And more, thanks to you,
+## our users and supporters!
+
+---
+
+
+## Thank you!
+
+<img src="./assets/logo.svg" height=400px style="width: 100%; text-align: center;">
+
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"none","slideNumber":false,"overview":true,"autoPlayMedia":true,"_":["slides/"],"static":"web","static-dirs":"slides/assets","staticDirs":"slides/assets","listing-template":"../globals/index/index.html","listingTemplate":"../globals/index/index.html","title":"Qfieldcloud Presentation"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) {
+        mermaid.init(mermaidOptions, '.stack.present > .present pre code.mermaid');
+        mermaid.init(mermaidOptions, '.slides > .present:not(.stack) pre code.mermaid');
+      }
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>
