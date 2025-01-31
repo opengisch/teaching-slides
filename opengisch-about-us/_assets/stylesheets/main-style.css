@@ -1,0 +1,119 @@
+/* qfield-theme.css */
+/* @theme qfield-theme*/
+
+/*@import 'qfield-base-theme.css';*/
+
+@import 'qfield-theme.css';
+
+:root {
+    --r-background-color: var(--opengisch-light);
+    /* --r-heading1-size: 200px;
+    --r-heading2-size: 150px;
+    --r-heading3-size: 100px;
+    --r-heading4-size: 70px;
+    --r-heading5-size: 60px;
+    --r-heading6-size: 25px; */
+    --r-block-margin: 20pt;
+}
+
+h1 { /* main titles */
+  color: var(--opengisch-dark);
+  font-weight: bold !important;
+  font-size: 50pt !important;
+  line-height: 48pt !important;
+  text-align: left !important;
+  margin-bottom: 20px !important;
+}
+
+h2 { /* smaller main titles */
+  color: var(--opengisch-dark) !important;
+  font-size: 15pt !important;
+  font-weight: lighter !important;
+  text-align: left !important;
+  margin-bottom: 20px !important;
+}
+
+h3 { /* secondary titles */
+  color: var(--opengisch-dark) !important;
+  text-align: left !important;
+  font-weight: bold !important;
+  font-size: 25pt !important;
+  margin-top: 70px !important;
+}
+
+h5 {
+  color: var(--opengisch-dark);
+  text-align: left;
+  font-size: 20pt;
+  font-variant: small-caps !important;
+}
+
+p,
+ul,
+tr,
+td,
+div {
+  color: var(--opengisch-dark) !important;
+  text-align: left !important;
+}
+
+/* CLASSES TO ADD TO CONTENT */
+
+.styled-video { /* videos */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+}
+
+.styled-image { /* images/jpg - not for pngs*/
+  border-radius: 15px; /* rounded corners*/
+  border: 0.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.styled-logo { /* OG logo */
+  width: 250px;
+  height: auto;
+  margin-bottom: -220px !important; /* why -?*/
+  margin-left: -10px !important;
+}
+
+.styled-cloud-logo { /*qfield cloud logo*/
+  width: 350px !important;
+  margin-left: -140px !important;
+  margin-bottom: -350px !important;
+}
+
+.green-title { /*green text esp. titles*/
+  color: var(--opengisch-green) !important;
+}
+
+.blue-title { /* blue text for qfield cloud esp. titles*/
+  color: var(--opengisch-blue) !important;
+}
+
+.custom-bullet-list li { /*for lists e.g. table of content, contact...*/
+  margin-left: -35px;
+  display: flex;
+  align-items: center;
+  font-weight: lighter;
+  font-size: 25pt;
+  margin-bottom: -30px;
+}
+
+.custom-bullet {
+  width: 35px;
+  vertical-align: middle;
+}
+
+.qf-background { /*cloud background*/
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  margin-top: 100px;
+  /*background: url('assets/cloud_2.svg') no-repeat center center / cover;*/
+  opacity: 0.2;
+  z-index: -1;
+}

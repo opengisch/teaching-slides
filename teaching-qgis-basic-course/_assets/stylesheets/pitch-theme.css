@@ -1,10 +1,10 @@
-/* pitch-theme.css */
-/* @theme pitch-theme*/
+/* qfield-theme.css */
+/* @theme qfield-theme*/
 
 @import 'base-theme.css';
 
 :root {
-    --r-background-color: var(--opengisch-green);
+    --r-background-color: var(--opengisch-light);
     --r-heading1-size: 200px;
     --r-heading2-size: 150px;
     --r-heading3-size: 100px;
@@ -14,13 +14,31 @@
 }
 
 
-h1, h2, h3, h4, h5, h6 {
-    color: var(--opengisch-light) !important;
-    -webkit-text-stroke: 3px var(--opengisch-blue);
-    text-align: left !important;
-}
-
-p {
+/* h1, h2 {
     color: var(--opengisch-dark) !important;
     text-align: left !important;
+}
+/*
+
+/* h3, h4, h5, h6 {
+    color: var(--opengisch-dark) !important;
+    text-align: left !important;
+}
+/*
+
+
+h1, h2, h3, h4, h5, h6, p, li {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+p,
+ul,
+tr,
+td,
+div {
+  color: var(--opengisch-dark) !important;
+  text-align: left !important;
+}
+li {
+  margin-top: 0.5em !important;
 }
